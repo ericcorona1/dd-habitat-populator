@@ -1,14 +1,36 @@
-import * as React from "react"
-
+import * as React from "react";
+import Biome from "../components/Biome";
+import Habitat from "../components/Habitat";
 
 const IndexPage = () => {
   return (
-    <main style={pageStyles}>
-     
+    <main>
+      <header>
+        <h1>POKEMON GENERATOR</h1>
+      </header>
+      <Biome />
+      <Habitat />
+      <footer>
+        <p>
+          &copy; {new Date().getFullYear()} <span>PokemonGenerator</span> Built
+          with <a href="https://www.gatsbyjs.com/">Gatsby</a>
+        </p>
+      </footer>
     </main>
-  )
-}
+  );
+};
 
-export default IndexPage
+export default IndexPage;
 
-export const Head = () => <title>Home Page</title>
+export const Head = () => {
+  return (
+    <>
+      <html lang="en" />
+      <title>Home Page</title>
+      <meta
+        name="description"
+        content="generate a selected number of pokemon by environment"
+      />
+    </>
+  );
+};
