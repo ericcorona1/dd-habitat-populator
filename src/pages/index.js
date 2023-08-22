@@ -26,7 +26,7 @@ export const Head = () => {
   return (
     <>
       <html lang="en" />
-      <title>Home Page</title>
+      <title>Generate Pokemon</title>
       <meta
         name="description"
         content="generate a selected number of pokemon by environment"
