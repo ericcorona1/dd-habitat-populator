@@ -20,15 +20,11 @@ module.exports = {
       },
       __key: "images",
     },
+    "gatsby-transformer-json",
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `data`,
-        path: `${__dirname}/src/assets/data/`,
-        // Ignore files starting with a dot
-        ignore: [`**/\.*`],
-        // Use "mtime" and "inode" to fingerprint files (to check if file has changed)
-        fastHash: true,
+        path: `./src/assets/data/`,
       },
     },
     {
