@@ -1,15 +1,31 @@
-import React from 'react';
-import HabitatList from './HabitatList';
+import React from "react";
+import HabitatList from "./HabitatList";
 
-const Habitat = () => {
+const query = graphql`
+  query {
+    allBiomesJson {
+      nodes {
+        biome_description
+        biome_name
+        habitat_name
+      }
+    }
+  }
+`;
+
+const Habitat = ({ habitats }) => {
+  const {
+    allBiomesJson: { nodes: biomes },
+  } = useStaticQuery(query);
+  const [selectedBiome, setSelectedBiome] = useState("");
+  const [allSelectedBiomes, setAllSelectedBiomes] = useState([]);
+  const habitatsInBiome = biomes[selectedBiome] || [];
   return (
     <section>
       <h2>SELECT HABITAT</h2>
-      <div>
-        {/* <HabitatList habitats={habitat}/> */}
-      </div>
+      <HabitatList habitats={habitats} />
     </section>
-  )
-}
+  );
+};
 
-export default Habitat
+export default Habitat;
