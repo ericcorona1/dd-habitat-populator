@@ -23,23 +23,33 @@ const IndexPage = () => {
   const [selectedBiome, setSelectedBiome] = useState("");
   const [allSelectedBiomes, setAllSelectedBiomes] = useState([]);
   const habitatsInBiome = biomes[selectedBiome] || [];
-  const changeSelectedBiome = (event) => {
+
+  const highlightBiomeIcon = (event) => {
     setSelectedBiome(event.target.value);
   };
-  const addBiomeToArray = () => {
-    if (selectedBiome && !allSelectedBiomes.includes(selectedBiome)) {
-      setAllSelectedBiomes([...allSelectedBiomes, selectedBiome]);
-    }
+
+  const toggleBiome = () => {
+    setTimeout(() => {
+      if (selectedBiome && allSelectedBiomes.includes(selectedBiome)) {
+        setAllSelectedBiomes(
+          allSelectedBiomes.filter((biome) => biome !== selectedBiome)
+        );
+      } else {
+        setAllSelectedBiomes([...allSelectedBiomes, selectedBiome]);
+      }
+    }, 1000);
   };
+
   return (
     <main>
       <header>
         <h1>POKEMON GENERATOR</h1>
       </header>
       <Biome
-        selectedbiome={selectedBiome}
+        selectedBiomeDescription={selectedBiomeDescription}
         allSelectedBiomes={allSelectedBiomes}
-        
+        highlightBiomeIcon={highlightBiomeIcon}
+        toggleBiome={toggleBiome}
       />
       <Habitat habitats={habitatsInBiome} />
       <footer>
