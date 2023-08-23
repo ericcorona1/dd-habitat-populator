@@ -23,13 +23,24 @@ const IndexPage = () => {
   const [selectedBiome, setSelectedBiome] = useState("");
   const [allSelectedBiomes, setAllSelectedBiomes] = useState([]);
   const habitatsInBiome = biomes[selectedBiome] || [];
+  const changeSelectedBiome = (event) => {
+    setSelectedBiome(event.target.value);
+  };
+  const addBiomeToArray = () => {
+    if (selectedBiome && !allSelectedBiomes.includes(selectedBiome)) {
+      setAllSelectedBiomes([...allSelectedBiomes, selectedBiome]);
+    }
+  };
   return (
     <main>
       <header>
         <h1>POKEMON GENERATOR</h1>
       </header>
-      <Biome />
-      <Habitat habitats={habitats}/>
+      <Biome
+        selectedbiome={selectedBiome}
+        allSelectedBiomes={allSelectedBiomes}
+      />
+      <Habitat habitats={habitatsInBiome} />
       <footer>
         <p>
           &copy; {new Date().getFullYear()} <span>PokemonGenerator</span> Built
