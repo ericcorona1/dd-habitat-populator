@@ -39,6 +39,7 @@ const IndexPage = () => {
       <Biome
         selectedbiome={selectedBiome}
         allSelectedBiomes={allSelectedBiomes}
+        
       />
       <Habitat habitats={habitatsInBiome} />
       <footer>

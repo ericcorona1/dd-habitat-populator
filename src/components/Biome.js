@@ -5,8 +5,8 @@ const Biome = () => {
   return (
     <section>
       <h2>SELECT BIOME</h2>
-      {/* This is where the input buttons will go */}
-      <BiomeSelect />
+      {/* pass the onHold method and onClick method */}
+      <BiomeSelect toggleBiome={toggleBiome} highlightIcon={highlightIcon}/>
       {/* <p>{biomeDescription}</p> */}
     </section>
   );
