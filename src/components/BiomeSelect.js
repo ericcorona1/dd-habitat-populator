@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaCity } from "@react-icons/all-files/fa/FaCity";
 import { GiWaterDrop } from "@react-icons/all-files/gi/GiWaterDrop";
 import { GiFallingRocks } from "@react-icons/all-files/gi/GiFallingRocks";
@@ -10,22 +10,22 @@ const BiomeSelect = ({ toggleBiome, highlightIcon }) => {
   return (
     <div className="button-container">
       <button>
-        <GiWaterDrop onMouseDown={toggleBiome} onClick={highlightIcon}/>
+        <GiWaterDrop onMouseDown={toggleBiome} onClick={highlightIcon} value="aquatic"/>
       </button>
       <button>
-        <FaCity onMouseDown={toggleBiome} onClick={highlightIcon}/>
+        <FaCity onMouseDown={toggleBiome} onClick={highlightIcon} />
       </button>
       <button>
-        <GiFallingRocks onMouseDown={toggleBiome} onClick={highlightIcon}/>
+        <GiFallingRocks onMouseDown={toggleBiome} onClick={highlightIcon} />
       </button>
       <button>
-        <GiHighGrass onMouseDown={toggleBiome} onClick={highlightIcon}/>
+        <GiHighGrass onMouseDown={toggleBiome} onClick={highlightIcon} />
       </button>
       <button>
-        <GiPineTree onMouseDown={toggleBiome} onClick={highlightIcon}/>
+        <GiPineTree onMouseDown={toggleBiome} onClick={highlightIcon} />
       </button>
       <button>
-        <GiSnowflake2 onMouseDown={toggleBiome} onClick={highlightIcon}/>
+        <GiSnowflake2 onMouseDown={toggleBiome} onClick={highlightIcon} />
       </button>
     </div>
   );

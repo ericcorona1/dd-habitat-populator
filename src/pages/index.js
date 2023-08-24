@@ -4,11 +4,10 @@ import Habitat from "../components/Habitat";
 import { graphql, useStaticQuery } from "gatsby";
 import { useState } from "react";
 
-const query = graphql`
-  query {
+const getData = graphql`
+  {
     allBiomesJson {
       nodes {
-        biome_description
         biome_name
         habitat_name
       }
@@ -19,13 +18,17 @@ const query = graphql`
 const IndexPage = () => {
   const {
     allBiomesJson: { nodes: biomes },
-  } = useStaticQuery(query);
+  } = useStaticQuery(getData);
   const [selectedBiome, setSelectedBiome] = useState("");
+  const [selectedBiomeDescription, setSelectedBiomeDescription] = useState("");
   const [allSelectedBiomes, setAllSelectedBiomes] = useState([]);
-  const habitatsInBiome = biomes[selectedBiome] || [];
+  const [habitatsInBiome, setHabitatsInBiome] = useState([]);
 
   const highlightBiomeIcon = (event) => {
+    console.log(event.target.value);
     setSelectedBiome(event.target.value);
+    setSelectedBiomeDescription(event.target.value);
+    updateHabitatsList();
   };
 
   const toggleBiome = () => {
@@ -39,6 +42,16 @@ const IndexPage = () => {
       }
     }, 1000);
   };
+
+  const updateHabitatsList = () => {
+    if (selectedBiome) {
+      biomes.forEach((biome) =>
+        setHabitatsInBiome([...habitatsInBiome, biome.biome_name.habitat_name])
+      );
+    }
+  };
+
+  console.log(selectedBiome);
 
   return (
     <main>
