@@ -7,28 +7,46 @@ import { useState } from "react";
 const getData = graphql`
   {
     allBiomesJson {
-      nodes {
-        biome_name
-        habitat_name
+      group(field: { biome_name: SELECT }) {
+        distinct(field: { biome_name: SELECT })
+        nodes {
+          habitat_name
+          biome_description
+        }
       }
     }
   }
 `;
 
 const IndexPage = () => {
+  // definitions
   const {
-    allBiomesJson: { nodes: biomes },
+    allBiomesJson: { group: biomes },
   } = useStaticQuery(getData);
+
   const [selectedBiome, setSelectedBiome] = useState("");
   const [selectedBiomeDescription, setSelectedBiomeDescription] = useState("");
   const [allSelectedBiomes, setAllSelectedBiomes] = useState([]);
   const [habitatsInBiome, setHabitatsInBiome] = useState([]);
 
+  // StructureBiomes will convert getData to a hierarchical structure
+  const structureBiomes = {};
+  biomes.forEach((biome) => {
+    const biomeName = biome.distinct[0];
+    const habitats = biome.nodes.map((habitat) => habitat.habitat_name);
+    const biomeDescription = biome.nodes[0].biome_description;
+    structureBiomes[biomeName] = {
+      habitats: habitats,
+      description: biomeDescription,
+    };
+  });
+  
+  // methods
   const highlightBiomeIcon = (event) => {
-    console.log(event.target.value);
-    setSelectedBiome(event.target.value);
-    setSelectedBiomeDescription(event.target.value);
-    updateHabitatsList();
+    const buttonValue = event.target.getAttribute("value");
+    setSelectedBiome(buttonValue);
+    setHabitatsInBiome(structureBiomes[buttonValue].habitats);
+    setSelectedBiomeDescription(structureBiomes[buttonValue].description)
   };
 
   const toggleBiome = () => {
@@ -43,16 +61,7 @@ const IndexPage = () => {
     }, 1000);
   };
 
-  const updateHabitatsList = () => {
-    if (selectedBiome) {
-      biomes.forEach((biome) =>
-        setHabitatsInBiome([...habitatsInBiome, biome.biome_name.habitat_name])
-      );
-    }
-  };
-
-  console.log(selectedBiome);
-
+  // render
   return (
     <main>
       <header>
@@ -63,6 +72,7 @@ const IndexPage = () => {
         allSelectedBiomes={allSelectedBiomes}
         highlightBiomeIcon={highlightBiomeIcon}
         toggleBiome={toggleBiome}
+        // allBiomeNames={allBiomeNames}
       />
       <Habitat habitats={habitatsInBiome} />
       <footer>
