@@ -23,12 +23,6 @@ const IndexPage = () => {
   const {
     allBiomesJson: { group: biomes },
   } = useStaticQuery(getData);
-
-  const [selectedBiome, setSelectedBiome] = useState("");
-  const [selectedBiomeDescription, setSelectedBiomeDescription] = useState("");
-  const [allSelectedBiomes, setAllSelectedBiomes] = useState([]);
-  const [habitatsInBiome, setHabitatsInBiome] = useState([]);
-
   // StructureBiomes will convert getData to a hierarchical structure
   const structureBiomes = {};
   biomes.forEach((biome) => {
@@ -40,13 +34,27 @@ const IndexPage = () => {
       description: biomeDescription,
     };
   });
-  
+
+  const startingBiome = 'aquatic';
+  const startingBiomeDescription = structureBiomes.aquatic.description;
+  const startingBiomeHabitats = structureBiomes.aquatic.habitats;
+
+  const [selectedBiome, setSelectedBiome] = useState(startingBiome);
+  const [selectedBiomeDescription, setSelectedBiomeDescription] = useState(
+    startingBiomeDescription
+  );
+  const [allSelectedBiomes, setAllSelectedBiomes] = useState([]);
+  const [habitatsInBiome, setHabitatsInBiome] = useState(startingBiomeHabitats);
+  const [counterValue, setCounterValue] = useState(0);
+
   // methods
   const highlightBiomeIcon = (event) => {
+    console.log('button pushed');
     const buttonValue = event.target.getAttribute("value");
     setSelectedBiome(buttonValue);
     setHabitatsInBiome(structureBiomes[buttonValue].habitats);
-    setSelectedBiomeDescription(structureBiomes[buttonValue].description)
+    setSelectedBiomeDescription(structureBiomes[buttonValue].description);
+    console.log(buttonValue);
   };
 
   const toggleBiome = () => {
@@ -74,7 +82,7 @@ const IndexPage = () => {
         toggleBiome={toggleBiome}
         // allBiomeNames={allBiomeNames}
       />
-      <Habitat habitats={habitatsInBiome} />
+      <Habitat habitats={habitatsInBiome} counterValue={counterValue} />
       <footer>
         <p>
           &copy; {new Date().getFullYear()} <span>PokemonGenerator</span> Built
