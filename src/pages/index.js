@@ -1,44 +1,33 @@
 import * as React from "react";
 import Biome from "../components/Biome";
 import Habitat from "../components/Habitat";
-import { graphql, useStaticQuery } from "gatsby";
 import { useState } from "react";
-
-const getData = graphql`
-  {
-    allBiomesJson {
-      group(field: { biome_name: SELECT }) {
-        distinct(field: { biome_name: SELECT })
-        nodes {
-          habitat_name
-          biome_description
-        }
-      }
-    }
-  }
-`;
+import biomeJson from "../assets/data/biomes.json";
 
 const IndexPage = () => {
-  // definitions
-  const {
-    allBiomesJson: { group: biomes },
-  } = useStaticQuery(getData);
   // StructureBiomes will convert getData to a hierarchical structure
   const structureBiomes = {};
-  biomes.forEach((biome) => {
-    const biomeName = biome.distinct[0];
-    const habitats = biome.nodes.map((habitat) => habitat.habitat_name);
-    const biomeDescription = biome.nodes[0].biome_description;
-    structureBiomes[biomeName] = {
-      habitats: habitats,
-      description: biomeDescription,
-    };
+
+  biomeJson.forEach((biome) => {
+    const biomeName = biome.biome_name;
+    const habitat = biome.habitat_name;
+    const biomeDescription = biome.biome_description;
+
+    if (!structureBiomes[biomeName]) {
+      structureBiomes[biomeName] = {
+        habitats: [],
+        description: biomeDescription,
+      };
+    }
+    structureBiomes[biomeName].habitats.push(habitat);
   });
 
-  const startingBiome = 'aquatic';
+  // starting values
+  const startingBiome = "aquatic";
   const startingBiomeDescription = structureBiomes.aquatic.description;
   const startingBiomeHabitats = structureBiomes.aquatic.habitats;
 
+  // state
   const [selectedBiome, setSelectedBiome] = useState(startingBiome);
   const [selectedBiomeDescription, setSelectedBiomeDescription] = useState(
     startingBiomeDescription
@@ -48,26 +37,39 @@ const IndexPage = () => {
   const [counterValue, setCounterValue] = useState(0);
 
   // methods
+  //   const highlightBiomeIcon = (event) => {
+  //     const buttonValue = event.target.getAttribute("value");
+  // console.log(buttonValue);
+  //     // Use the functional form of setState
+  //     setSelectedBiome((prevBiome) => {
+  //       setHabitatsInBiome(structureBiomes[buttonValue].habitats);
+  //       setSelectedBiomeDescription(structureBiomes[buttonValue].description);
+
+  //       return buttonValue;
+  //     });
+  //   };
+
   const highlightBiomeIcon = (event) => {
-    console.log('button pushed');
-    const buttonValue = event.target.getAttribute("value");
+    console.log("button pushed");
+    const buttonValue = event.currentTarget.value;
+    // const buttonValue = event.target.getAttribute("value");
+    console.log(buttonValue);
     setSelectedBiome(buttonValue);
     setHabitatsInBiome(structureBiomes[buttonValue].habitats);
     setSelectedBiomeDescription(structureBiomes[buttonValue].description);
-    console.log(buttonValue);
   };
 
-  const toggleBiome = () => {
-    setTimeout(() => {
-      if (selectedBiome && allSelectedBiomes.includes(selectedBiome)) {
-        setAllSelectedBiomes(
-          allSelectedBiomes.filter((biome) => biome !== selectedBiome)
-        );
-      } else {
-        setAllSelectedBiomes([...allSelectedBiomes, selectedBiome]);
-      }
-    }, 1000);
-  };
+  // const toggleBiome = () => {
+  //   setTimeout(() => {
+  //     if (selectedBiome && allSelectedBiomes.includes(selectedBiome)) {
+  //       setAllSelectedBiomes(
+  //         allSelectedBiomes.filter((biome) => biome !== selectedBiome)
+  //       );
+  //     } else {
+  //       setAllSelectedBiomes([...allSelectedBiomes, selectedBiome]);
+  //     }
+  //   }, 1000);
+  // };
 
   // render
   return (
@@ -79,7 +81,7 @@ const IndexPage = () => {
         selectedBiomeDescription={selectedBiomeDescription}
         allSelectedBiomes={allSelectedBiomes}
         highlightBiomeIcon={highlightBiomeIcon}
-        toggleBiome={toggleBiome}
+        // toggleBiome={toggleBiome}
         // allBiomeNames={allBiomeNames}
       />
       <Habitat habitats={habitatsInBiome} counterValue={counterValue} />

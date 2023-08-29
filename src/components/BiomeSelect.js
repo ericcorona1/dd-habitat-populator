@@ -9,47 +9,23 @@ import { GiSnowflake2 } from "@react-icons/all-files/gi/GiSnowflake2";
 const BiomeSelect = ({ toggleBiome, highlightBiomeIcon }) => {
   return (
     <div className="button-container">
-      <button>
-        <GiWaterDrop
-          onMouseDown={toggleBiome}
-          onClick={highlightBiomeIcon}
-          value="aquatic"
-        />
+      <button onClick={highlightBiomeIcon} value="aquatic">
+        <GiWaterDrop />
       </button>
-      <button>
-        <FaCity
-          onMouseDown={toggleBiome}
-          onClick={highlightBiomeIcon}
-          value="urban"
-        />
+      <button onClick={highlightBiomeIcon} value="urban">
+        <FaCity />
       </button>
-      <button>
-        <GiFallingRocks
-          onMouseDown={toggleBiome}
-          onClick={highlightBiomeIcon}
-          value="desert"
-        />
+      <button onClick={highlightBiomeIcon} value="desert">
+        <GiFallingRocks />
       </button>
-      <button>
-        <GiHighGrass
-          onMouseDown={toggleBiome}
-          onClick={highlightBiomeIcon}
-          value="grassland"
-        />
+      <button onClick={highlightBiomeIcon} value="grassland">
+        <GiHighGrass />
       </button>
-      <button>
-        <GiPineTree
-          onMouseDown={toggleBiome}
-          onClick={highlightBiomeIcon}
-          value="forest"
-        />
+      <button onClick={highlightBiomeIcon} value="forest">
+        <GiPineTree />
       </button>
-      <button>
-        <GiSnowflake2
-          onMouseDown={toggleBiome}
-          onClick={highlightBiomeIcon}
-          value="tundra"
-        />
+      <button onClick={highlightBiomeIcon} value="tundra">
+        <GiSnowflake2 />
       </button>
     </div>
   );

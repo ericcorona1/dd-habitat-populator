@@ -11,7 +11,7 @@ const Biome = ({
       <h2>SELECT BIOME</h2>
       {/* pass the onHold method and onClick method */}
       <BiomeSelect
-        toggleBiome={toggleBiome}
+        // toggleBiome={toggleBiome}
         highlightBiomeIcon={highlightBiomeIcon}
         // allBiomeNames={allBiomeNames}
       />
