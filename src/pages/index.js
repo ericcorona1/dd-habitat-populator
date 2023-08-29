@@ -37,23 +37,9 @@ const IndexPage = () => {
   const [counterValue, setCounterValue] = useState(0);
 
   // methods
-  //   const highlightBiomeIcon = (event) => {
-  //     const buttonValue = event.target.getAttribute("value");
-  // console.log(buttonValue);
-  //     // Use the functional form of setState
-  //     setSelectedBiome((prevBiome) => {
-  //       setHabitatsInBiome(structureBiomes[buttonValue].habitats);
-  //       setSelectedBiomeDescription(structureBiomes[buttonValue].description);
-
-  //       return buttonValue;
-  //     });
-  //   };
-
   const highlightBiomeIcon = (event) => {
-    console.log("button pushed");
     const buttonValue = event.currentTarget.value;
     // const buttonValue = event.target.getAttribute("value");
-    console.log(buttonValue);
     setSelectedBiome(buttonValue);
     setHabitatsInBiome(structureBiomes[buttonValue].habitats);
     setSelectedBiomeDescription(structureBiomes[buttonValue].description);
