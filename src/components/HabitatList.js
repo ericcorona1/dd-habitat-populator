@@ -1,16 +1,16 @@
 import React from "react";
 
-const HabitatList = ({ habitats, counterValue }) => {
+const HabitatList = ({ habitats, counterValues, increment, decrement }) => {
   return (
     <div className="habitat-container">
-      {habitats.map((habitat) => {
+      {habitats.map((habitat, index) => {
         return (
-          <div className="habitatList">
+          <div className="habitatList" key={index}>
             <p>{habitat}</p>
             <div className="buttonContainer">
-              <button>-</button>
-              <span className="counterOutput">{counterValue}</span>
-              <button>+</button>
+              <button onClick={() => decrement(index)}>-</button>
+              <span className="counterOutput">{counterValues[index]}</span>
+              <button onClick={() => increment(index)}>+</button>
             </div>
           </div>
         );

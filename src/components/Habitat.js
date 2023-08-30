@@ -1,11 +1,16 @@
 import React from "react";
 import HabitatList from "./HabitatList";
 
-const Habitat = ({ habitats, counterValue }) => {
+const Habitat = ({ habitats, counterValues, increment, decrement }) => {
   return (
     <section>
       <h2>SELECT HABITAT</h2>
-      <HabitatList habitats={habitats} counterValue={counterValue} />
+      <HabitatList
+        habitats={habitats}
+        counterValues={counterValues}
+        increment={increment}
+        decrement={decrement}
+      />
     </section>
   );
 };

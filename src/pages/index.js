@@ -34,7 +34,9 @@ const IndexPage = () => {
   );
   const [allSelectedBiomes, setAllSelectedBiomes] = useState([]);
   const [habitatsInBiome, setHabitatsInBiome] = useState(startingBiomeHabitats);
-  const [counterValue, setCounterValue] = useState(0);
+  const [counterValues, setCounterValues] = useState(
+    Array.from({ length: habitatsInBiome.length }, () => 0)
+  );
 
   // methods
   const highlightBiomeIcon = (event) => {
@@ -57,6 +59,20 @@ const IndexPage = () => {
   //   }, 1000);
   // };
 
+  const increment = (index) => {
+    const updatedCounters = [...counterValues];
+    updatedCounters[index] += 1;
+    setCounterValues(updatedCounters);
+  };
+
+  const decrement = (index) => {
+    const updatedCounters = [...counterValues];
+    if (updatedCounters[index] > 0) {
+      updatedCounters[index] -= 1;
+      setCounterValues(updatedCounters);
+    }
+  };
+
   // render
   return (
     <main>
@@ -70,7 +86,12 @@ const IndexPage = () => {
         // toggleBiome={toggleBiome}
         // allBiomeNames={allBiomeNames}
       />
-      <Habitat habitats={habitatsInBiome} counterValue={counterValue} />
+      <Habitat
+        habitats={habitatsInBiome}
+        counterValues={counterValues}
+        increment={increment}
+        decrement={decrement}
+      />
       <footer>
         <p>
           &copy; {new Date().getFullYear()} <span>PokemonGenerator</span> Built
