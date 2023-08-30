@@ -1,7 +1,7 @@
 import React from "react";
 import HabitatList from "./HabitatList";
 
-const Habitat = ({ habitats, counterValues, increment, decrement }) => {
+const Habitat = ({ habitats, counterValues, increment, decrement, trackHabitatCounters }) => {
   return (
     <section>
       <h2>SELECT HABITAT</h2>
@@ -10,6 +10,7 @@ const Habitat = ({ habitats, counterValues, increment, decrement }) => {
         counterValues={counterValues}
         increment={increment}
         decrement={decrement}
+        trackHabitatCounters={trackHabitatCounters}
       />
     </section>
   );

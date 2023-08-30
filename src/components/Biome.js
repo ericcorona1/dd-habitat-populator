@@ -5,6 +5,7 @@ const Biome = ({
   toggleBiome,
   highlightBiomeIcon,
   selectedBiomeDescription,
+  biomeArray,
 }) => {
   return (
     <section>
@@ -13,6 +14,7 @@ const Biome = ({
       <BiomeSelect
         // toggleBiome={toggleBiome}
         highlightBiomeIcon={highlightBiomeIcon}
+        biomeArray={biomeArray}
         // allBiomeNames={allBiomeNames}
       />
       <p>{selectedBiomeDescription}</p>

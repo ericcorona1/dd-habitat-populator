@@ -3,16 +3,15 @@ import Biome from "../components/Biome";
 import Habitat from "../components/Habitat";
 import { useState } from "react";
 import biomeJson from "../assets/data/biomes.json";
+import "../assets/css/main.css";
 
 const IndexPage = () => {
   // StructureBiomes will convert getData to a hierarchical structure
   const structureBiomes = {};
-
   biomeJson.forEach((biome) => {
     const biomeName = biome.biome_name;
     const habitat = biome.habitat_name;
     const biomeDescription = biome.biome_description;
-
     if (!structureBiomes[biomeName]) {
       structureBiomes[biomeName] = {
         habitats: [],
@@ -21,40 +20,44 @@ const IndexPage = () => {
     }
     structureBiomes[biomeName].habitats.push(habitat);
   });
-
-  // starting values
-  const startingBiome = "aquatic";
-  const startingBiomeDescription = structureBiomes.aquatic.description;
-  const startingBiomeHabitats = structureBiomes.aquatic.habitats;
+  // create index for biome names
+  const biomeArray = Object.keys(structureBiomes);
 
   // state
-  const [selectedBiome, setSelectedBiome] = useState(startingBiome);
-  const [selectedBiomeDescription, setSelectedBiomeDescription] = useState(
-    startingBiomeDescription
-  );
-  const [allSelectedBiomes, setAllSelectedBiomes] = useState([]);
-  const [habitatsInBiome, setHabitatsInBiome] = useState(startingBiomeHabitats);
+  const [selectedBiomeIndex, setSelectedBiomeIndex] = useState(0);
+  const selectedBiome = structureBiomes[biomeArray[selectedBiomeIndex]];
+  const selectedBiomeDescription = selectedBiome.description;
+  // const [allSelectedBiomes, setAllSelectedBiomes] = useState([]);
+  const habitatsInBiome = selectedBiome.habitats;
   const [counterValues, setCounterValues] = useState(
     Array.from({ length: habitatsInBiome.length }, () => 0)
   );
-
+  const [allCounterValues, setAllCounterValues] = useState(
+    Array.from({ length: biomeArray.length }, () => [])
+  );
   // methods
-  const highlightBiomeIcon = (event) => {
-    const buttonValue = event.currentTarget.value;
-    // const buttonValue = event.target.getAttribute("value");
-    setSelectedBiome(buttonValue);
-    setHabitatsInBiome(structureBiomes[buttonValue].habitats);
-    setSelectedBiomeDescription(structureBiomes[buttonValue].description);
+  const highlightBiomeIcon = (index) => {
+    setSelectedBiomeIndex(index);
   };
 
+  const trackHabitatCounters = (index) => {
+    const updatedCountersArrays = [...allCounterValues];
+    updatedCountersArrays[selectedBiomeIndex] = [...counterValues]; // Copy current counter values
+
+    // Update the counter value for the specified habitat index
+    updatedCountersArrays[selectedBiomeIndex][index] += 1;
+
+    setAllCounterValues(updatedCountersArrays);
+  };
+  console.log(allCounterValues);
   // const toggleBiome = () => {
   //   setTimeout(() => {
-  //     if (selectedBiome && allSelectedBiomes.includes(selectedBiome)) {
+  //     if (selectedBiomeIndex && allSelectedBiomes.includes(selectedBiomeIndex)) {
   //       setAllSelectedBiomes(
-  //         allSelectedBiomes.filter((biome) => biome !== selectedBiome)
+  //         allSelectedBiomes.filter((biome) => biome !== selectedBiomeIndex)
   //       );
   //     } else {
-  //       setAllSelectedBiomes([...allSelectedBiomes, selectedBiome]);
+  //       setAllSelectedBiomes([...allSelectedBiomes, selectedBiomeIndex]);
   //     }
   //   }, 1000);
   // };
@@ -81,8 +84,9 @@ const IndexPage = () => {
       </header>
       <Biome
         selectedBiomeDescription={selectedBiomeDescription}
-        allSelectedBiomes={allSelectedBiomes}
+        // allSelectedBiomes={allSelectedBiomes}
         highlightBiomeIcon={highlightBiomeIcon}
+        biomeArray={biomeArray}
         // toggleBiome={toggleBiome}
         // allBiomeNames={allBiomeNames}
       />
@@ -91,6 +95,7 @@ const IndexPage = () => {
         counterValues={counterValues}
         increment={increment}
         decrement={decrement}
+        trackHabitatCounters={trackHabitatCounters}
       />
       <footer>
         <p>
