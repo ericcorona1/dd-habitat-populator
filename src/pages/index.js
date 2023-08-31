@@ -27,29 +27,30 @@ const IndexPage = () => {
   const [selectedBiomeIndex, setSelectedBiomeIndex] = useState(0);
   const selectedBiome = structureBiomes[biomeArray[selectedBiomeIndex]];
   const selectedBiomeDescription = selectedBiome.description;
-  // const [allSelectedBiomes, setAllSelectedBiomes] = useState([]);
   const habitatsInBiome = selectedBiome.habitats;
+  // const [allSelectedBiomes, setAllSelectedBiomes] = useState([]);
   const [counterValues, setCounterValues] = useState(
     Array.from({ length: habitatsInBiome.length }, () => 0)
   );
-  const [allCounterValues, setAllCounterValues] = useState(
-    Array.from({ length: biomeArray.length }, () => [])
-  );
+  console.log(counterValues);
   // methods
   const highlightBiomeIcon = (index) => {
     setSelectedBiomeIndex(index);
   };
 
-  const trackHabitatCounters = (index) => {
-    const updatedCountersArrays = [...allCounterValues];
-    updatedCountersArrays[selectedBiomeIndex] = [...counterValues]; // Copy current counter values
-
-    // Update the counter value for the specified habitat index
-    updatedCountersArrays[selectedBiomeIndex][index] += 1;
-
-    setAllCounterValues(updatedCountersArrays);
+  const increment = (index) => {
+    const copyCounter = [...counterValues];
+    copyCounter[index] += 1;
+    setCounterValues(copyCounter);
   };
-  console.log(allCounterValues);
+
+  const decrement = (index) => {
+    const copyCounter = [...counterValues];
+    if (copyCounter[index] > 0) {
+      copyCounter[index] -= 1;
+      setCounterValues(copyCounter);
+    }
+  };
   // const toggleBiome = () => {
   //   setTimeout(() => {
   //     if (selectedBiomeIndex && allSelectedBiomes.includes(selectedBiomeIndex)) {
@@ -62,19 +63,6 @@ const IndexPage = () => {
   //   }, 1000);
   // };
 
-  const increment = (index) => {
-    const updatedCounters = [...counterValues];
-    updatedCounters[index] += 1;
-    setCounterValues(updatedCounters);
-  };
-
-  const decrement = (index) => {
-    const updatedCounters = [...counterValues];
-    if (updatedCounters[index] > 0) {
-      updatedCounters[index] -= 1;
-      setCounterValues(updatedCounters);
-    }
-  };
 
   // render
   return (
@@ -84,18 +72,15 @@ const IndexPage = () => {
       </header>
       <Biome
         selectedBiomeDescription={selectedBiomeDescription}
-        // allSelectedBiomes={allSelectedBiomes}
         highlightBiomeIcon={highlightBiomeIcon}
         biomeArray={biomeArray}
-        // toggleBiome={toggleBiome}
-        // allBiomeNames={allBiomeNames}
       />
       <Habitat
         habitats={habitatsInBiome}
         counterValues={counterValues}
         increment={increment}
         decrement={decrement}
-        trackHabitatCounters={trackHabitatCounters}
+        selectedBiomeIndex={selectedBiomeIndex}
       />
       <footer>
         <p>

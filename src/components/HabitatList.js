@@ -5,7 +5,7 @@ const HabitatList = ({
   counterValues,
   increment,
   decrement,
-  trackHabitatCounters,
+  selectedBiomeIndex,
 }) => {
   return (
     <div className="habitat-container">
@@ -17,7 +17,6 @@ const HabitatList = ({
               <button
                 onClick={() => {
                   decrement(index);
-                  trackHabitatCounters(index);
                 }}
               >
                 -
@@ -26,7 +25,6 @@ const HabitatList = ({
               <button
                 onClick={() => {
                   increment(index);
-                  trackHabitatCounters(index);
                 }}
               >
                 +
