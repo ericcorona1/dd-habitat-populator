@@ -21,7 +21,9 @@ const HabitatList = ({
               >
                 -
               </button>
-              <span className="counterOutput">{counterValues[index]}</span>
+              <span className="counterOutput">
+                {counterValues[selectedBiomeIndex][index]}
+              </span>
               <button
                 onClick={() => {
                   increment(index);

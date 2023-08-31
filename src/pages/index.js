@@ -28,33 +28,31 @@ const IndexPage = () => {
   const selectedBiome = structureBiomes[biomeArray[selectedBiomeIndex]];
   const selectedBiomeDescription = selectedBiome.description;
   const habitatsInBiome = selectedBiome.habitats;
-  const initialCounters = biomeArray.map(biome => {
-    const counterArrays = Array(structureBiomes[biome].habitats.length).fill(0);
-    return counterArrays
-  });
-  const counterValues = initialCounters[selectedBiomeIndex]
+  const initialCounters = [];
+  for (const biome in structureBiomes) {
+    const count = [];
+    structureBiomes[biome].habitats.forEach(() => count.push(0));
+    initialCounters.push(count);
+  }
+  const [allCounters, setAllCounters] = useState(initialCounters);
   // const [allSelectedBiomes, setAllSelectedBiomes] = useState([]);
-  // const [counterValues, setCounterValues] = useState(
-  //   Array.from({ length: habitatsInBiome.length }, () => 0)
-  // );
-  // const [counterValues, setCounterValues] = useState(initialCounters[selectedBiomeIndex]);
-  console.log("counter values: " + counterValues);
+
   // methods
   const highlightBiomeIcon = (index) => {
     setSelectedBiomeIndex(index);
   };
 
   const increment = (index) => {
-    const copyCounter = [...counterValues];
-    copyCounter[index] += 1;
-    // setCounterValues(copyCounter);
+    const updateCounter = [...allCounters];
+    updateCounter[selectedBiomeIndex][index] += 1;
+    setAllCounters(updateCounter);
   };
 
   const decrement = (index) => {
-    const copyCounter = [...counterValues];
-    if (copyCounter[index] > 0) {
-      copyCounter[index] -= 1;
-      // setCounterValues(copyCounter);
+    const updateCounter = [...allCounters];
+    if (updateCounter[selectedBiomeIndex][index] > 0) {
+      updateCounter[selectedBiomeIndex][index] -= 1;
+      setAllCounters(updateCounter);
     }
   };
   // const toggleBiome = () => {
@@ -82,7 +80,7 @@ const IndexPage = () => {
       />
       <Habitat
         habitats={habitatsInBiome}
-        counterValues={counterValues}
+        counterValues={allCounters}
         increment={increment}
         decrement={decrement}
         selectedBiomeIndex={selectedBiomeIndex}
