@@ -28,11 +28,17 @@ const IndexPage = () => {
   const selectedBiome = structureBiomes[biomeArray[selectedBiomeIndex]];
   const selectedBiomeDescription = selectedBiome.description;
   const habitatsInBiome = selectedBiome.habitats;
+  const initialCounters = biomeArray.map(biome => {
+    const counterArrays = Array(structureBiomes[biome].habitats.length).fill(0);
+    return counterArrays
+  });
+  const counterValues = initialCounters[selectedBiomeIndex]
   // const [allSelectedBiomes, setAllSelectedBiomes] = useState([]);
-  const [counterValues, setCounterValues] = useState(
-    Array.from({ length: habitatsInBiome.length }, () => 0)
-  );
-  console.log(counterValues);
+  // const [counterValues, setCounterValues] = useState(
+  //   Array.from({ length: habitatsInBiome.length }, () => 0)
+  // );
+  // const [counterValues, setCounterValues] = useState(initialCounters[selectedBiomeIndex]);
+  console.log("counter values: " + counterValues);
   // methods
   const highlightBiomeIcon = (index) => {
     setSelectedBiomeIndex(index);
@@ -41,14 +47,14 @@ const IndexPage = () => {
   const increment = (index) => {
     const copyCounter = [...counterValues];
     copyCounter[index] += 1;
-    setCounterValues(copyCounter);
+    // setCounterValues(copyCounter);
   };
 
   const decrement = (index) => {
     const copyCounter = [...counterValues];
     if (copyCounter[index] > 0) {
       copyCounter[index] -= 1;
-      setCounterValues(copyCounter);
+      // setCounterValues(copyCounter);
     }
   };
   // const toggleBiome = () => {
@@ -62,7 +68,6 @@ const IndexPage = () => {
   //     }
   //   }, 1000);
   // };
-
 
   // render
   return (
