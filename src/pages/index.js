@@ -24,8 +24,6 @@ UpdatedBiomeJson.forEach((biome) => {
   structureBiomes[biomeId].habitats.push(habitatObj);
 });
 
-console.log(structureBiomes[1].habitats);
-
 const IndexPage = () => {
   // get the IDs in the structureBiomes
   // StructureBiomes will convert getData to a hierarchical structure
@@ -36,8 +34,8 @@ const IndexPage = () => {
 
   // state
   // the index should be changed to id
-  const [selectedBiomeIndex, setSelectedBiomeIndex] = useState(1);
-  const selectedBiome = structureBiomes[selectedBiomeIndex];
+  const [selectedBiomeId, setSelectedBiomeId] = useState(1);
+  const selectedBiome = structureBiomes[selectedBiomeId];
   const selectedBiomeDescription = selectedBiome.description;
   const habitatsInBiome = selectedBiome.habitats.map(habitat => habitat.habitatName);
   const initialCounters = [];
@@ -47,37 +45,23 @@ const IndexPage = () => {
     initialCounters.push(count);
   }
   const [allCounters, setAllCounters] = useState(initialCounters);
-  // const [allSelectedBiomes, setAllSelectedBiomes] = useState([]);
   const [randomPokemon, setRandomPokemon] = useState([]);
-  for (let biomeIndex = 0; biomeIndex < allCounters.length; biomeIndex++) {
-    const biomeName = structureBiomes[biomeIndex];
-    const biomesCounterArray = allCounters[biomeIndex];
-    for (
-      let habitatIndex = 0;
-      habitatIndex < biomesCounterArray.length;
-      habitatIndex++
-    ) {
-      // const habitatName = structureBiomes[biomeIndex][habitatIndex];
-      const habitatCounters = biomesCounterArray[habitatIndex];
-      // console.log(habitatCounters);
-    }
-  }
 
   // methods
-  const highlightBiomeIcon = (index) => {
-    setSelectedBiomeIndex(index);
+  const highlightBiomeIcon = (biomeId) => {
+    setSelectedBiomeId(biomeId);
   };
-
+console.log(selectedBiomeId);
   const increment = (index) => {
     const updateCounter = [...allCounters];
-    updateCounter[selectedBiomeIndex][index] += 1;
+    updateCounter[selectedBiomeId][index] += 1;
     setAllCounters(updateCounter);
   };
 
   const decrement = (index) => {
     const updateCounter = [...allCounters];
-    if (updateCounter[selectedBiomeIndex][index] > 0) {
-      updateCounter[selectedBiomeIndex][index] -= 1;
+    if (updateCounter[selectedBiomeId][index] > 0) {
+      updateCounter[selectedBiomeId][index] -= 1;
       setAllCounters(updateCounter);
     }
   };
@@ -95,7 +79,7 @@ const IndexPage = () => {
         selectedBiomeDescription={selectedBiomeDescription}
         highlightBiomeIcon={highlightBiomeIcon}
         biomeArray={biomeArray}
-        selectedBiomeIndex={selectedBiomeIndex}
+        selectedBiomeId={selectedBiomeId}
         counterValues={allCounters}
       />
       <Habitat
@@ -103,7 +87,7 @@ const IndexPage = () => {
         counterValues={allCounters}
         increment={increment}
         decrement={decrement}
-        selectedBiomeIndex={selectedBiomeIndex}
+        selectedBiomeId={selectedBiomeId}
       />
       <OverlayList counterValues={allCounters} />
 

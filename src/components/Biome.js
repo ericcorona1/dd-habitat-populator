@@ -5,7 +5,7 @@ const Biome = ({
   selectedBiomeDescription,
   highlightBiomeIcon,
   biomeArray,
-  selectedBiomeIndex,
+  selectedBiomeId,
   counterValues,
 }) => {
   return (
@@ -15,7 +15,7 @@ const Biome = ({
       <BiomeSelect
         highlightBiomeIcon={highlightBiomeIcon}
         biomeArray={biomeArray}
-        selectedBiomeIndex={selectedBiomeIndex}
+        selectedBiomeId={selectedBiomeId}
         counterValues={counterValues}
       />
       <p>{selectedBiomeDescription}</p>

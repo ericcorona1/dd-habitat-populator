@@ -9,22 +9,23 @@ import { GiSnowflake2 } from "@react-icons/all-files/gi/GiSnowflake2";
 const BiomeSelect = ({
   highlightBiomeIcon,
   biomeArray,
-  selectedBiomeIndex,
+  selectedBiomeId,
   counterValues,
 }) => {
-  // const biomesWithHabitatValues = {};
-
   return (
     <div className="button-container">
-      {biomeArray.map((biome, index) => {
-        // conditional classNames
-        const currentBiome = selectedBiomeIndex === index ? "selected" : "";
+      {biomeArray.map((biomeId, index) => {
+        // conditional classNames [1, 2, 3, 4, 5]
+        // this needs to update to work with id's
+        const currentBiome = selectedBiomeId == biomeId ? "selected" : "";
+        console.log("selectedBiomeId");
+        console.log(selectedBiomeId == biomeId ? selectedBiomeId : "nope");
+        // this needs to use id
         const biomesWithHabitatValues = counterValues[index].some(
           (entry) => entry !== 0
         )
           ? "includedBiome"
           : "";
-          // console.log(biomesWithHabitatValues);
         let icon;
         switch (index) {
           case 0:
@@ -51,9 +52,9 @@ const BiomeSelect = ({
 
         return (
           <button
-            onClick={() => highlightBiomeIcon(index)}
+            onClick={() => highlightBiomeIcon(biomeId)}
             key={index}
-            value={biome}
+            value={biomeId}
             className={`${currentBiome} ${biomesWithHabitatValues}`}
           >
             {icon}
