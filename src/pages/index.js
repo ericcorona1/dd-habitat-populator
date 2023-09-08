@@ -3,24 +3,30 @@ import Biome from "../components/Biome";
 import Habitat from "../components/Habitat";
 import OverlayList from "../components/overlayList";
 import { useState } from "react";
-import biomeJson from "../assets/data/biomes.json";
+import UpdatedBiomeJson from "../assets/data/updatedBiomes.json";
 import "../assets/css/main.css";
 
 const IndexPage = () => {
+  // get the IDs in the structureBiomes
   // StructureBiomes will convert getData to a hierarchical structure
   const structureBiomes = {};
-  biomeJson.forEach((biome) => {
+  UpdatedBiomeJson.forEach((biome) => {
+    const biomeId = biome.biome_id;
     const biomeName = biome.biome_name;
-    const habitat = biome.habitat_name;
+    const habitatId = biome.habitat_id;
+    const habitatName = biome.habitat_name;
+    const habitatObj = {habitatId, habitatName};
     const biomeDescription = biome.biome_description;
-    if (!structureBiomes[biomeName]) {
-      structureBiomes[biomeName] = {
-        habitats: [],
-        description: biomeDescription,
-      };
-    }
-    structureBiomes[biomeName].habitats.push(habitat);
+    if(!structureBiomes[biomeId]) {
+      structureBiomes[biomeId] = {
+          biomeName: biomeName,
+          habitats: [],
+          description: biomeDescription,
+        };
+      }
+      structureBiomes[biomeId].habitats.push(habitatObj);
   });
+  console.log(structureBiomes);
   // create index for biome names
   const biomeArray = Object.keys(structureBiomes);
 
@@ -68,7 +74,11 @@ const IndexPage = () => {
     }
   };
 
-  // console.log(allCounters);
+  console.log(allCounters);
+
+// step 1: I want to filter biomes with a values, filter values from the all counters array
+// step 2: I want to use the values to generate that many random pokemon, when we are fetching our pokemon we don;t care about the value of the biome
+
   // render
   return (
     <main>
@@ -90,6 +100,7 @@ const IndexPage = () => {
         selectedBiomeIndex={selectedBiomeIndex}
       />
       <OverlayList counterValues={allCounters}/>
+      
       <footer>
         <p>
           &copy; {new Date().getFullYear()} <span>PokemonGenerator</span> Built

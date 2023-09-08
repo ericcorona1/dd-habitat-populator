@@ -47,9 +47,10 @@ const [modalOpen, setModalOpen] = useState(false);
           })}
         </dialog>
       )} */}
+        {modalOpen && (
       <dialog open>
         <button onClick={closeModal}>Close</button>
-      </dialog>
+      </dialog>)}
     </div>
   );
 };
