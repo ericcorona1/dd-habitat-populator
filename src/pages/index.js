@@ -24,7 +24,7 @@ UpdatedBiomeJson.forEach((biome) => {
   structureBiomes[biomeId].habitats.push(habitatObj);
 });
 
-console.log(Object.keys(structureBiomes));
+console.log(structureBiomes[1]);
 
 const IndexPage = () => {
   // get the IDs in the structureBiomes
@@ -37,7 +37,7 @@ const IndexPage = () => {
   // state
   // the index should be changed to id
   const [selectedBiomeIndex, setSelectedBiomeIndex] = useState(1);
-  const selectedBiome = structureBiomes[biomeArray[selectedBiomeIndex]];
+  const selectedBiome = structureBiomes[selectedBiomeIndex];
   const selectedBiomeDescription = selectedBiome.description;
   const habitatsInBiome = selectedBiome.habitats.habitatName;
   console.log(habitatsInBiome);
