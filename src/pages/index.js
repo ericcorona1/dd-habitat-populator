@@ -1,6 +1,7 @@
 import * as React from "react";
 import Biome from "../components/Biome";
 import Habitat from "../components/Habitat";
+import OverlayList from "../components/overlayList";
 import { useState } from "react";
 import biomeJson from "../assets/data/biomes.json";
 import "../assets/css/main.css";
@@ -36,6 +37,17 @@ const IndexPage = () => {
   }
   const [allCounters, setAllCounters] = useState(initialCounters);
   // const [allSelectedBiomes, setAllSelectedBiomes] = useState([]);
+  const [randomPokemon, setRandomPokemon] = useState([]);
+  for(let biomeIndex = 0; biomeIndex < allCounters.length; biomeIndex++) {
+    const biomeName = structureBiomes[biomeIndex];
+    console.log(biomeName);
+    const biomesCounterArray = allCounters[biomeIndex]
+    for(let habitatIndex = 0; habitatIndex < biomesCounterArray.length; habitatIndex++) {
+      // const habitatName = structureBiomes[biomeIndex][habitatIndex];
+      const habitatCounters = biomesCounterArray[habitatIndex];
+      // console.log(habitatCounters);
+    }
+  }
 
   // methods
   const highlightBiomeIcon = (index) => {
@@ -55,18 +67,8 @@ const IndexPage = () => {
       setAllCounters(updateCounter);
     }
   };
-  // const toggleBiome = () => {
-  //   setTimeout(() => {
-  //     if (selectedBiomeIndex && allSelectedBiomes.includes(selectedBiomeIndex)) {
-  //       setAllSelectedBiomes(
-  //         allSelectedBiomes.filter((biome) => biome !== selectedBiomeIndex)
-  //       );
-  //     } else {
-  //       setAllSelectedBiomes([...allSelectedBiomes, selectedBiomeIndex]);
-  //     }
-  //   }, 1000);
-  // };
 
+  // console.log(allCounters);
   // render
   return (
     <main>
@@ -77,6 +79,8 @@ const IndexPage = () => {
         selectedBiomeDescription={selectedBiomeDescription}
         highlightBiomeIcon={highlightBiomeIcon}
         biomeArray={biomeArray}
+        selectedBiomeIndex={selectedBiomeIndex}
+        counterValues={allCounters}
       />
       <Habitat
         habitats={habitatsInBiome}
@@ -85,6 +89,7 @@ const IndexPage = () => {
         decrement={decrement}
         selectedBiomeIndex={selectedBiomeIndex}
       />
+      <OverlayList counterValues={allCounters}/>
       <footer>
         <p>
           &copy; {new Date().getFullYear()} <span>PokemonGenerator</span> Built

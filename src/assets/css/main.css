@@ -1,4 +1,9 @@
 .selected {
-    border-style: solid;
-    border-color: aqua;
+  border-style: solid;
+  border-color: blue;
+  border-radius: 5px;
+}
+
+.includedBiome {
+  background-color: lightblue;
 }

@@ -24,6 +24,14 @@ const HabitatList = ({
               <span className="counterOutput">
                 {counterValues[selectedBiomeIndex][index]}
               </span>
+              {/* <input
+                type="number"
+                value={counterValues[selectedBiomeIndex][index]}
+                onChange={(event) => {
+                  // You may want to add validation or error handling here
+                  increment(index, parseInt(event.target.value, 10));
+                }}
+              /> */}
               <button
                 onClick={() => {
                   increment(index);

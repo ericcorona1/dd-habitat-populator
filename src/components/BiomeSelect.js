@@ -6,10 +6,25 @@ import { GiHighGrass } from "@react-icons/all-files/gi/GiHighGrass";
 import { GiPineTree } from "@react-icons/all-files/gi/GiPineTree";
 import { GiSnowflake2 } from "@react-icons/all-files/gi/GiSnowflake2";
 
-const BiomeSelect = ({ toggleBiome, highlightBiomeIcon, biomeArray }) => {
+const BiomeSelect = ({
+  highlightBiomeIcon,
+  biomeArray,
+  selectedBiomeIndex,
+  counterValues,
+}) => {
+  // const biomesWithHabitatValues = {};
+
   return (
     <div className="button-container">
       {biomeArray.map((biome, index) => {
+        // conditional classNames
+        const currentBiome = selectedBiomeIndex === index ? "selected" : "";
+        const biomesWithHabitatValues = counterValues[index].some(
+          (entry) => entry !== 0
+        )
+          ? "includedBiome"
+          : "";
+          // console.log(biomesWithHabitatValues);
         let icon;
         switch (index) {
           case 0:
@@ -39,6 +54,7 @@ const BiomeSelect = ({ toggleBiome, highlightBiomeIcon, biomeArray }) => {
             onClick={() => highlightBiomeIcon(index)}
             key={index}
             value={biome}
+            className={`${currentBiome} ${biomesWithHabitatValues}`}
           >
             {icon}
           </button>
