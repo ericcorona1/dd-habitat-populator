@@ -11,12 +11,13 @@ const Biome = ({
     <section>
       <h2>SELECT BIOME</h2>
       {/* pass the onHold method and onClick method */}
-      <BiomeSelect
-        highlightBiomeIcon={highlightBiomeIcon}
-        biomeArray={biomeArray}
-        selectedBiomeId={selectedBiomeId}
-        biomeData={biomeData}
-      />
+      {biomeArray.map((biome) => {
+        <BiomeSelect
+          biomeArray={biomeArray}
+          selectedBiomeId={selectedBiomeId}
+          biomeData={biomeData}
+        />;
+      })}
       <p>{selectedBiomeDescription}</p>
     </section>
   );

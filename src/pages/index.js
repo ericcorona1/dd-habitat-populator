@@ -6,9 +6,9 @@ import { useState } from "react";
 import UpdatedBiomeJson from "../assets/data/updatedBiomes.json";
 import "../assets/css/main.css";
 
-
 const organizedData = UpdatedBiomeJson.reduce((acc, biome) => {
-  const { biome_id, biome_name, habitat_id, habitat_name, biome_description } = biome;
+  const { biome_id, biome_name, habitat_id, habitat_name, biome_description } =
+    biome;
 
   if (!acc[biome_id]) {
     acc[biome_id] = {
@@ -28,22 +28,8 @@ const organizedData = UpdatedBiomeJson.reduce((acc, biome) => {
   return acc;
 }, {});
 
-
-// Initialize the biome data with counts
 const structureBiomes = Object.values(organizedData);
 
-// console.log(Object.entries(organizedData).forEach(([biomeId, biomeData]) => {
-//   console.log(`Biome ID: ${biomeId}`);
-//   console.log(`Biome Name: ${biomeData.biomeName}`);
-//   console.log(`Description: ${biomeData.description}`);
-//   console.log(`Habitats:`);
-//   biomeData.habitats.forEach((habitat) => {
-//     console.log(`  Habitat ID: ${habitat.habitatId}`);
-//     console.log(`  Habitat Name: ${habitat.habitatName}`);
-//     console.log(`  Count: ${habitat.count}`);
-//   });
-//   console.log('---'); // Separating each biome
-// }));
 const IndexPage = () => {
   // create index for biome id's, this needs to be updated
   const biomeArray = Object.keys(organizedData);
@@ -55,27 +41,21 @@ const IndexPage = () => {
   const habitatsInBiome = selectedBiome.habitats.map(
     (habitat) => habitat.habitatName
   );
-  const initialCounters = Object.entries(organizedData).map(([biomeId, biomeData]) =>{
-    const biomeId = biomeId;
-    biomeData.habitats.map((habitat) => ({
-      biomeId: biomeId, 
-      habitatId: habitat.habitatId,
-      count: 0
-    }))
-  });
+  const [habitatCounts, setHabitatCounts] = useState({});
 
+  const initialHabitatCounts = (organizedData) => {
+    const counts = {};
+    for (const biomeId in organizedData) {
+      if (organizedData.hasOwnProperty(biomeId)) {
+        const biome = organizedData[BiomeId];
+        biome.habitats.forEach((habitat) => {
+          counts[habitat.habitatId] = habitat.count;
+        });
+      }
+    }
+    setHabitatCounts(counts);
+  };
 
-  for (const biome in structureBiomes) {
-    const count = [];
-    structureBiomes[biome].habitats.forEach(() => count.push(0));
-    initialCounters.push(count);
-  }
-  const [allCounters, setAllCounters] = useState(initialCounters);
-
-  // methods
-
-  // step 1: I want to filter biomes with a values, filter values from the all counters array
-  // step 2: I want to use the values to generate that many random pokemon, when we are fetching our pokemon we don;t care about the value of the biome
 
   // render
   return (
@@ -85,7 +65,6 @@ const IndexPage = () => {
       </header>
       <Biome
         selectedBiomeDescription={selectedBiomeDescription}
-        highlightBiomeIcon={highlightBiomeIcon}
         biomeArray={biomeArray}
         selectedBiomeId={selectedBiomeId}
         biomeData={organizedData}

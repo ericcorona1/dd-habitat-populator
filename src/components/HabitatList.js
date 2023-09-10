@@ -20,14 +20,13 @@ const HabitatList = ({
   };
   return (
     <div className="habitat-container">
-      {habitats.map((habitat, index) => {
         return (
           <div className="habitatList" key={index}>
             <p>{habitat}</p>
             <div className="buttonContainer">
               <button
                 onClick={() => {
-                  decrement(index);
+                  decrement(habitatId.count);
                 }}
               >
                 -
@@ -45,7 +44,7 @@ const HabitatList = ({
               /> */}
               <button
                 onClick={() => {
-                  increment(index);
+                  increment(habitatId.count);
                 }}
               >
                 +
@@ -53,7 +52,6 @@ const HabitatList = ({
             </div>
           </div>
         );
-      })}
     </div>
   );
 };
