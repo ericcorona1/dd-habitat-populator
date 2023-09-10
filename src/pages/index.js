@@ -15,15 +15,14 @@ const organizedData = UpdatedBiomeJson.reduce((acc, biome) => {
       biomeId: biome_id, // Include biomeId here
       biomeName: biome_name,
       description: biome_description,
-      habitats: [],
+      habitats: {},
     };
   }
 
-  acc[biome_id].habitats.push({
-    habitatId: habitat_id,
+  acc[biome_id].habitats[habitat_id] = {
     habitatName: habitat_name,
     count: 0,
-  });
+  };
 
   return acc;
 }, {});
@@ -35,28 +34,26 @@ const IndexPage = () => {
   // state
   const [biomeData, setBiomeData] = useState(organizedData);
   const [selectedBiomeId, setSelectedBiomeId] = useState(1);
-  // const selectedBiome = organizedData[selectedBiomeId];
-  // const selectedBiomeDescription = selectedBiome.description;
-  // const habitatsInBiome = selectedBiome.habitats.map(
-  //   (habitat) => habitat.habitatName
-  // );
-  const [habitatCounts, setHabitatCounts] = useState({});
-
-  const initialHabitatCounts = (organizedData) => {
-    const counts = {};
-    for (const biomeId in organizedData) {
-      if (organizedData.hasOwnProperty(biomeId)) {
-        const biome = organizedData[BiomeId];
-        biome.habitats.forEach((habitat) => {
-          counts[habitat.habitatId] = habitat.count;
-        });
-      }
-    }
-    setHabitatCounts(counts);
-  };
 
   const highlightBiomeIcon = (biomeId) => {
     setSelectedBiomeId(biomeId);
+  };
+
+  const increment = (biomeId, habitatId) => {
+    const updateBiome = biomeData.map((biome) => {
+      if (biome)
+    });
+    // this takes the array of counters, uses the id to find its array, then uses index. maybe each array should have an id associated with their biome?
+    updateCounter[selectedBiomeId][index] += 1;
+    setAllCounters(updateCounter);
+  };
+
+  const decrement = (index) => {
+    const updateCounter = [...allCounters];
+    if (updateCounter[selectedBiomeId][index] > 0) {
+      updateCounter[selectedBiomeId][index] -= 1;
+      setAllCounters(updateCounter);
+    }
   };
 
   // render
