@@ -9,13 +9,13 @@ const Habitat = ({
   return (
     <section>
       <h2>SELECT HABITAT</h2>
+      {habitatData.map((habitat) => {
       <HabitatList
         habitats={habitats}
         counterValues={counterValues}
-        increment={increment}
-        decrement={decrement}
         selectedBiomeId={selectedBiomeId}
       />
+      })}
     </section>
   );
 };

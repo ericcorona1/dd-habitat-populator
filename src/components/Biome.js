@@ -3,7 +3,6 @@ import BiomeSelect from "./BiomeSelect";
 
 const Biome = ({
   selectedBiomeDescription,
-  highlightBiomeIcon,
   biomeArray,
   selectedBiomeId,
   biomeData,

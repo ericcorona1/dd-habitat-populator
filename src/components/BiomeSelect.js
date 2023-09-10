@@ -7,7 +7,6 @@ import { GiPineTree } from "@react-icons/all-files/gi/GiPineTree";
 import { GiSnowflake2 } from "@react-icons/all-files/gi/GiSnowflake2";
 
 const BiomeSelect = ({
-  highlightBiomeIcon,
   biomeArray,
   selectedBiomeId,
   biomeData,
