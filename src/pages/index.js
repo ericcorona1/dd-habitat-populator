@@ -73,23 +73,6 @@ const IndexPage = () => {
   const [allCounters, setAllCounters] = useState(initialCounters);
 
   // methods
-  const highlightBiomeIcon = (biomeId) => {
-    setSelectedBiomeId(biomeId);
-  };
-  const increment = (index) => {
-    const updateCounter = [...allCounters];
-    // this takes the array of counters, uses the id to find its array, then uses index. maybe each array should have an id associated with their biome?
-    updateCounter[selectedBiomeId][index] += 1;
-    setAllCounters(updateCounter);
-  };
-
-  const decrement = (index) => {
-    const updateCounter = [...allCounters];
-    if (updateCounter[selectedBiomeId][index] > 0) {
-      updateCounter[selectedBiomeId][index] -= 1;
-      setAllCounters(updateCounter);
-    }
-  };
 
   // step 1: I want to filter biomes with a values, filter values from the all counters array
   // step 2: I want to use the values to generate that many random pokemon, when we are fetching our pokemon we don;t care about the value of the biome
@@ -110,8 +93,6 @@ const IndexPage = () => {
       <Habitat
         habitats={habitatsInBiome}
         counterValues={allCounters}
-        increment={increment}
-        decrement={decrement}
         selectedBiomeId={selectedBiomeId}
       />
       <OverlayList counterValues={allCounters} />

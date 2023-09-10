@@ -4,8 +4,6 @@ import HabitatList from "./HabitatList";
 const Habitat = ({
   habitats,
   counterValues,
-  increment,
-  decrement,
   selectedBiomeId,
 }) => {
   return (
