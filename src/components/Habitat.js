@@ -1,21 +1,22 @@
 import React from "react";
 import HabitatList from "./HabitatList";
 
-const Habitat = ({
-  habitats,
-  counterValues,
-  selectedBiomeId,
-}) => {
+const Habitat = ({ selectedBiome, increment, decrement }) => {
+  const { habitats } = selectedBiome;
   return (
     <section>
       <h2>SELECT HABITAT</h2>
-      {habitatData.map((habitat) => {
-      <HabitatList
-        habitats={habitats}
-        counterValues={counterValues}
-        selectedBiomeId={selectedBiomeId}
-      />
-      })}
+      {Object.keys(habitats).map((habitatId) => {
+          return (
+            <HabitatList
+              key={habitatId} // Make sure to include a unique key when rendering in a loop
+              increment={increment}
+              decrement={decrement}
+              habitat={habitats}
+            />
+          );
+        })
+      }
     </section>
   );
 };

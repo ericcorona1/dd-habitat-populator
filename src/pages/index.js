@@ -20,6 +20,7 @@ const organizedData = UpdatedBiomeJson.reduce((acc, biome) => {
   }
 
   acc[biome_id].habitats[habitat_id] = {
+    habitatId: habitat_id,
     habitatName: habitat_name,
     count: 0,
   };
@@ -28,9 +29,6 @@ const organizedData = UpdatedBiomeJson.reduce((acc, biome) => {
 }, {});
 
 const IndexPage = () => {
-  // create index for biome id's, this needs to be updated
-  const biomeArray = Object.keys(organizedData);
-
   // state
   const [biomeData, setBiomeData] = useState(organizedData);
   const [selectedBiomeId, setSelectedBiomeId] = useState(1);
@@ -40,19 +38,28 @@ const IndexPage = () => {
   };
 
   const increment = (biomeId, habitatId) => {
-    const updateBiome = biomeData.map((biome) => {
-      if (biome)
-    });
-    // this takes the array of counters, uses the id to find its array, then uses index. maybe each array should have an id associated with their biome?
-    updateCounter[selectedBiomeId][index] += 1;
-    setAllCounters(updateCounter);
+    const updatedBiomeData = { ...biomeData };
+    const updatedBiome = updatedBiomeData[biomeId];
+    const updatedHabitat = updatedBiome.habitats[habitatId];
+    let updatedCount = updatedHabitat.count;
+    if (updatedBiome) {
+      if (updatedHabitat) {
+        updatedCount += 1;
+        setBiomeData(updatedCount);
+      }
+    }
   };
 
-  const decrement = (index) => {
-    const updateCounter = [...allCounters];
-    if (updateCounter[selectedBiomeId][index] > 0) {
-      updateCounter[selectedBiomeId][index] -= 1;
-      setAllCounters(updateCounter);
+  const decrement = (biomeId, habitatId) => {
+    const updatedBiomeData = { ...biomeData };
+    const updatedBiome = updatedBiomeData[biomeId];
+    const updatedHabitat = updatedBiome.habitats[habitatId];
+    let updatedCount = updatedHabitat.count;
+    if (updatedBiome) {
+      if (updatedHabitat) {
+        updatedCount -= 1;
+        setBiomeData(updatedCount);
+      }
     }
   };
 
@@ -63,17 +70,16 @@ const IndexPage = () => {
         <h1>POKEMON GENERATOR</h1>
       </header>
       <Biome
-        biomeArray={biomeArray}
-        selectedBiomeId={selectedBiomeId}
-        biomeData={organizedData}
+        selectedBiome={biomeData[selectedBiomeId]}
+        biomeData={biomeData}
         highlightBiomeIcon={highlightBiomeIcon}
       />
       <Habitat
-        habitats={habitatsInBiome}
-        counterValues={allCounters}
-        selectedBiomeId={selectedBiomeId}
+        selectedBiome={biomeData[selectedBiomeId]}
+        onIncrement={increment}
+        onDecrement={decrement}
       />
-      <OverlayList counterValues={allCounters} />
+      <OverlayList />
 
       <footer>
         <p>
