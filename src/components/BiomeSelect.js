@@ -6,56 +6,48 @@ import { GiHighGrass } from "@react-icons/all-files/gi/GiHighGrass";
 import { GiPineTree } from "@react-icons/all-files/gi/GiPineTree";
 import { GiSnowflake2 } from "@react-icons/all-files/gi/GiSnowflake2";
 
-const BiomeSelect = ({
-  highlightBiomeIcon,
-  biomeArray,
-  selectedBiomeId,
-  counterValues,
-}) => {
+const BiomeSelect = ({ highlightBiomeIcon, biomeArray, selectedBiomeId, biomeData }) => {
   return (
     <div className="button-container">
-      {biomeArray.map((biomeId, index) => {
-        // conditional classNames [1, 2, 3, 4, 5]
-        // this needs to update to work with id's
-        const currentBiome = selectedBiomeId == biomeId ? "selected" : "";
-        console.log("selectedBiomeId");
-        console.log(selectedBiomeId == biomeId ? selectedBiomeId : "nope");
+      {biomeArray.map((biome, index) => {
+        const biomeId = parseInt(biome);
+        const currentBiome = selectedBiomeId === biomeId ? "selected" : "";
         // this needs to use id
-        const biomesWithHabitatValues = counterValues[index].some(
-          (entry) => entry !== 0
+        const hasHabitatValues = biomeData[biomeId].habitats.some(
+          (habitat) => habitat.count !== 0
         )
           ? "includedBiome"
           : "";
+
         let icon;
-        switch (index) {
-          case 0:
+        switch (biomeId) {
+          case 1:
             icon = <GiWaterDrop />;
             break;
-          case 1:
+          case 2:
             icon = <GiHighGrass />;
             break;
-          case 2:
+          case 3:
             icon = <GiPineTree />;
             break;
-          case 3:
+          case 4:
             icon = <GiFallingRocks />;
             break;
-          case 4:
+          case 5:
             icon = <GiSnowflake2 />;
             break;
-          case 5:
+          case 6:
             icon = <FaCity />;
             break;
           default:
             icon = <GiWaterDrop />;
         }
-
         return (
           <button
             onClick={() => highlightBiomeIcon(biomeId)}
             key={index}
             value={biomeId}
-            className={`${currentBiome} ${biomesWithHabitatValues}`}
+            className={`${currentBiome} ${hasHabitatValues}`}
           >
             {icon}
           </button>

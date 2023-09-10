@@ -6,7 +6,7 @@ const Habitat = ({
   counterValues,
   increment,
   decrement,
-  selectedBiomeIndex,
+  selectedBiomeId,
 }) => {
   return (
     <section>
@@ -16,7 +16,7 @@ const Habitat = ({
         counterValues={counterValues}
         increment={increment}
         decrement={decrement}
-        selectedBiomeIndex={selectedBiomeIndex}
+        selectedBiomeId={selectedBiomeId}
       />
     </section>
   );

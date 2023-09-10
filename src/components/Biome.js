@@ -6,7 +6,7 @@ const Biome = ({
   highlightBiomeIcon,
   biomeArray,
   selectedBiomeId,
-  counterValues,
+  biomeData,
 }) => {
   return (
     <section>
@@ -16,7 +16,7 @@ const Biome = ({
         highlightBiomeIcon={highlightBiomeIcon}
         biomeArray={biomeArray}
         selectedBiomeId={selectedBiomeId}
-        counterValues={counterValues}
+        biomeData={biomeData}
       />
       <p>{selectedBiomeDescription}</p>
     </section>

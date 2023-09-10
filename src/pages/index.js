@@ -6,54 +6,79 @@ import { useState } from "react";
 import UpdatedBiomeJson from "../assets/data/updatedBiomes.json";
 import "../assets/css/main.css";
 
-const structureBiomes = {};
-UpdatedBiomeJson.forEach((biome) => {
-  const biomeId = biome.biome_id;
-  const biomeName = biome.biome_name;
-  const habitatId = biome.habitat_id;
-  const habitatName = biome.habitat_name;
-  const habitatObj = { habitatId, habitatName };
-  const biomeDescription = biome.biome_description;
-  if (!structureBiomes[biomeId]) {
-    structureBiomes[biomeId] = {
-      biomeName: biomeName,
+
+const organizedData = UpdatedBiomeJson.reduce((acc, biome) => {
+  const { biome_id, biome_name, habitat_id, habitat_name, biome_description } = biome;
+
+  if (!acc[biome_id]) {
+    acc[biome_id] = {
+      biomeId: biome_id, // Include biomeId here
+      biomeName: biome_name,
+      description: biome_description,
       habitats: [],
-      description: biomeDescription,
     };
   }
-  structureBiomes[biomeId].habitats.push(habitatObj);
-});
 
+  acc[biome_id].habitats.push({
+    habitatId: habitat_id,
+    habitatName: habitat_name,
+    count: 0,
+  });
+
+  return acc;
+}, {});
+
+
+// Initialize the biome data with counts
+const structureBiomes = Object.values(organizedData);
+
+// console.log(Object.entries(organizedData).forEach(([biomeId, biomeData]) => {
+//   console.log(`Biome ID: ${biomeId}`);
+//   console.log(`Biome Name: ${biomeData.biomeName}`);
+//   console.log(`Description: ${biomeData.description}`);
+//   console.log(`Habitats:`);
+//   biomeData.habitats.forEach((habitat) => {
+//     console.log(`  Habitat ID: ${habitat.habitatId}`);
+//     console.log(`  Habitat Name: ${habitat.habitatName}`);
+//     console.log(`  Count: ${habitat.count}`);
+//   });
+//   console.log('---'); // Separating each biome
+// }));
 const IndexPage = () => {
-  // get the IDs in the structureBiomes
-  // StructureBiomes will convert getData to a hierarchical structure
-
   // create index for biome id's, this needs to be updated
-  const biomeArray = Object.keys(structureBiomes);
-  // [1,2,3,4,5,6]
+  const biomeArray = Object.keys(organizedData);
 
   // state
-  // the index should be changed to id
   const [selectedBiomeId, setSelectedBiomeId] = useState(1);
-  const selectedBiome = structureBiomes[selectedBiomeId];
+  const selectedBiome = organizedData[selectedBiomeId];
   const selectedBiomeDescription = selectedBiome.description;
-  const habitatsInBiome = selectedBiome.habitats.map(habitat => habitat.habitatName);
-  const initialCounters = [];
+  const habitatsInBiome = selectedBiome.habitats.map(
+    (habitat) => habitat.habitatName
+  );
+  const initialCounters = Object.entries(organizedData).map(([biomeId, biomeData]) =>{
+    const biomeId = biomeId;
+    biomeData.habitats.map((habitat) => ({
+      biomeId: biomeId, 
+      habitatId: habitat.habitatId,
+      count: 0
+    }))
+  });
+
+
   for (const biome in structureBiomes) {
     const count = [];
     structureBiomes[biome].habitats.forEach(() => count.push(0));
     initialCounters.push(count);
   }
   const [allCounters, setAllCounters] = useState(initialCounters);
-  const [randomPokemon, setRandomPokemon] = useState([]);
 
   // methods
   const highlightBiomeIcon = (biomeId) => {
     setSelectedBiomeId(biomeId);
   };
-console.log(selectedBiomeId);
   const increment = (index) => {
     const updateCounter = [...allCounters];
+    // this takes the array of counters, uses the id to find its array, then uses index. maybe each array should have an id associated with their biome?
     updateCounter[selectedBiomeId][index] += 1;
     setAllCounters(updateCounter);
   };
@@ -80,7 +105,7 @@ console.log(selectedBiomeId);
         highlightBiomeIcon={highlightBiomeIcon}
         biomeArray={biomeArray}
         selectedBiomeId={selectedBiomeId}
-        counterValues={allCounters}
+        biomeData={organizedData}
       />
       <Habitat
         habitats={habitatsInBiome}
