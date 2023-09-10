@@ -28,19 +28,18 @@ const organizedData = UpdatedBiomeJson.reduce((acc, biome) => {
   return acc;
 }, {});
 
-const structureBiomes = Object.values(organizedData);
-
 const IndexPage = () => {
   // create index for biome id's, this needs to be updated
   const biomeArray = Object.keys(organizedData);
 
   // state
+  const [biomeData, setBiomeData] = useState(organizedData);
   const [selectedBiomeId, setSelectedBiomeId] = useState(1);
-  const selectedBiome = organizedData[selectedBiomeId];
-  const selectedBiomeDescription = selectedBiome.description;
-  const habitatsInBiome = selectedBiome.habitats.map(
-    (habitat) => habitat.habitatName
-  );
+  // const selectedBiome = organizedData[selectedBiomeId];
+  // const selectedBiomeDescription = selectedBiome.description;
+  // const habitatsInBiome = selectedBiome.habitats.map(
+  //   (habitat) => habitat.habitatName
+  // );
   const [habitatCounts, setHabitatCounts] = useState({});
 
   const initialHabitatCounts = (organizedData) => {
@@ -56,6 +55,9 @@ const IndexPage = () => {
     setHabitatCounts(counts);
   };
 
+  const highlightBiomeIcon = (biomeId) => {
+    setSelectedBiomeId(biomeId);
+  };
 
   // render
   return (
@@ -64,10 +66,10 @@ const IndexPage = () => {
         <h1>POKEMON GENERATOR</h1>
       </header>
       <Biome
-        selectedBiomeDescription={selectedBiomeDescription}
         biomeArray={biomeArray}
         selectedBiomeId={selectedBiomeId}
         biomeData={organizedData}
+        highlightBiomeIcon={highlightBiomeIcon}
       />
       <Habitat
         habitats={habitatsInBiome}

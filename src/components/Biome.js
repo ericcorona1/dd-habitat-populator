@@ -2,10 +2,10 @@ import React from "react";
 import BiomeSelect from "./BiomeSelect";
 
 const Biome = ({
-  selectedBiomeDescription,
   biomeArray,
   selectedBiomeId,
   biomeData,
+  higlightBiomeIcon
 }) => {
   return (
     <section>
@@ -16,9 +16,10 @@ const Biome = ({
           biomeArray={biomeArray}
           selectedBiomeId={selectedBiomeId}
           biomeData={biomeData}
+          higlightBiomeIcon={higlightBiomeIcon}
         />;
       })}
-      <p>{selectedBiomeDescription}</p>
+      <p>{biomeData[selectedBiomeId].description}</p>
     </section>
   );
 };

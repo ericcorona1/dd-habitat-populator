@@ -10,10 +10,9 @@ const BiomeSelect = ({
   biomeArray,
   selectedBiomeId,
   biomeData,
+  highlightBiomeIcon
 }) => {
-  const highlightBiomeIcon = (biomeId) => {
-    setSelectedBiomeId(biomeId);
-  };
+
   return (
     <div className="button-container">
       {biomeArray.map((biome, index) => {
