@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import RandomPokemonList from "./RandomPokemonList";
 
 // const overlayContent = () => {
 //   return (
@@ -14,7 +15,7 @@ import { useState } from "react";
 //   );
 // };
 
-const OverlayList = (counterValues) => {
+const OverlayList = (biomeData) => {
 
 //   function filterByCategoryAndCount(data, category, count) {
 //     return data.filter((item) => item.category === category).slice(0, count);
@@ -50,6 +51,9 @@ const [modalOpen, setModalOpen] = useState(false);
         {modalOpen && (
       <dialog open>
         <button onClick={closeModal}>Close</button>
+        <RandomPokemonList 
+        biomeData={biomeData}
+        />
       </dialog>)}
     </div>
   );

@@ -1,7 +1,7 @@
 import * as React from "react";
 import Biome from "../components/Biome";
 import Habitat from "../components/Habitat";
-import OverlayList from "../components/overlayList";
+import OverlayList from "../components/OverlayList";
 import { useState } from "react";
 import UpdatedBiomeJson from "../assets/data/updatedBiomes.json";
 import "../assets/css/main.css";
@@ -91,7 +91,9 @@ const IndexPage = () => {
         increment={increment}
         decrement={decrement}
       />
-      <OverlayList />
+      <OverlayList 
+        biomeData={biomeData}
+      />
 
       <footer>
         <p>
