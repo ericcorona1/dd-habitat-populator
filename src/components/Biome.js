@@ -7,41 +7,43 @@ import { GiHighGrass } from "@react-icons/all-files/gi/GiHighGrass";
 import { GiPineTree } from "@react-icons/all-files/gi/GiPineTree";
 import { GiSnowflake2 } from "@react-icons/all-files/gi/GiSnowflake2";
 
-const Biome = ({ selectedBiome, biomeData, higlightBiomeIcon }) => {
+const Biome = ({ selectedBiome, biomeData, highlightBiomeIcon }) => {
   return (
-    <section>
+    <section className="biomeBtn-container">
       <h2>SELECT BIOME</h2>
       {Object.keys(biomeData).map((biomeId) => {
         let icon;
         switch (biomeId) {
-          case '1':
+          case "1":
             icon = <GiWaterDrop />;
             break;
-          case '2':
+          case "2":
             icon = <GiHighGrass />;
             break;
-          case '3':
+          case "3":
             icon = <GiPineTree />;
             break;
-          case '4':
+          case "4":
             icon = <GiFallingRocks />;
             break;
-          case '5':
+          case "5":
             icon = <GiSnowflake2 />;
             break;
-          case '6':
+          case "6":
             icon = <FaCity />;
             break;
           default:
             icon = <GiWaterDrop />;
         }
-        return (<BiomeSelect
-          selectedBiome={selectedBiome}
-          biomeData={biomeData}
-          higlightBiomeIcon={higlightBiomeIcon}
-          icon={icon}
-          biomeId={biomeId}
-        />)
+        return (
+          <BiomeSelect
+            selectedBiome={selectedBiome}
+            biomeData={biomeData}
+            highlightBiomeIcon={highlightBiomeIcon}
+            icon={icon}
+            biomeId={biomeId}
+          />
+        );
       })}
       <p>{selectedBiome.description}</p>
     </section>
