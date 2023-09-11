@@ -17,34 +17,35 @@ const Biome = ({ selectedBiome, biomeData, highlightBiomeIcon }) => {
           case "1":
             icon = <GiWaterDrop />;
             break;
-          case "2":
-            icon = <GiHighGrass />;
+            case "2":
+              icon = <GiHighGrass />;
+              break;
+              case "3":
+                icon = <GiPineTree />;
+                break;
+                case "4":
+                  icon = <GiFallingRocks />;
             break;
-          case "3":
-            icon = <GiPineTree />;
-            break;
-          case "4":
-            icon = <GiFallingRocks />;
-            break;
-          case "5":
-            icon = <GiSnowflake2 />;
-            break;
-          case "6":
-            icon = <FaCity />;
-            break;
-          default:
-            icon = <GiWaterDrop />;
-        }
-        return (
-          <BiomeSelect
-            selectedBiome={selectedBiome}
-            biomeData={biomeData}
-            highlightBiomeIcon={highlightBiomeIcon}
-            icon={icon}
-            biomeId={biomeId}
-          />
+            case "5":
+              icon = <GiSnowflake2 />;
+              break;
+              case "6":
+                icon = <FaCity />;
+                break;
+                default:
+                  icon = <GiWaterDrop />;
+                }
+                return (
+                  <BiomeSelect
+                  selectedBiome={selectedBiome}
+                  biomeData={biomeData}
+                  highlightBiomeIcon={highlightBiomeIcon}
+                  icon={icon}
+                  biomeId={biomeId}
+                  />
         );
       })}
+      <h3>{selectedBiome.biomeName.toUpperCase()}</h3>
       <p>{selectedBiome.description}</p>
     </section>
   );
