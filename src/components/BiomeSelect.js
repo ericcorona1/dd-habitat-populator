@@ -4,12 +4,13 @@ const BiomeSelect = ({
   biomeData,
   highlightBiomeIcon,
   icon,
-  biomeId
+  biomeId,
 }) => {
   const currentBiome = selectedBiome === biomeId ? "selected" : "";
-  const habitatObj = biomeData[biomeId].habitats[1];
-console.log(Object.values(habitatObj));  
-  const hasHabitatValues = habitatObj.some(
+  const habitatObj = biomeData[biomeId].habitats;
+  console.log("habitat obj");
+  console.log(Object.values(habitatObj));
+  const hasHabitatValues = Object.values(habitatObj).some(
     (habitat) => habitat.count !== 0
   )
     ? "includedBiome"
@@ -17,16 +18,14 @@ console.log(Object.values(habitatObj));
 
   return (
     <div className="button-container">
-        return (
-          <button
-            onClick={() => highlightBiomeIcon(biomeId)}
-            key={biomeId}
-            value={biomeId}
-            className={`${currentBiome} ${hasHabitatValues}`}
-          >
-            {icon}
-          </button>
-        );
+      <button
+        onClick={() => highlightBiomeIcon(biomeId)}
+        key={biomeId}
+        value={biomeId}
+        className={`${currentBiome} ${hasHabitatValues}`}
+      >
+        {icon}
+      </button>
     </div>
   );
 };
