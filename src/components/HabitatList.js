@@ -1,10 +1,6 @@
 import React from "react";
 
 const HabitatList = ({ increment, decrement, habitat, habitatId, biomeId }) => {
-  console.log(`Habitat: ${habitat[habitatId].habitatName}`);
-  console.log(habitat[habitatId].count);
-  console.log(`biomeId ${biomeId}`);
-  console.log(`habitat Id ${habitatId}`);
   return (
     <div className="habitat-container">
       <div className="habitatList">

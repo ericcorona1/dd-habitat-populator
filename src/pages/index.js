@@ -40,32 +40,37 @@ const IndexPage = () => {
   const increment = (biomeId, habitatId) => {
     // Clone the state data to avoid mutating it directly
     const updatedBiomeData = { ...biomeData };
-  
+
     // Check if the biomeId exists in the data
     if (updatedBiomeData[biomeId]) {
       const updatedHabitat = updatedBiomeData[biomeId].habitats[habitatId];
-  
+
       // Check if the habitatId exists within the biome
       if (updatedHabitat) {
         // Increment the count for the specified habitat
         updatedHabitat.count += 1;
-  
+
         // Update the state with the modified data
         setBiomeData(updatedBiomeData);
       }
     }
   };
-  
 
   const decrement = (biomeId, habitatId) => {
+    // Clone the state data to avoid mutating it directly
     const updatedBiomeData = { ...biomeData };
-    const updatedBiome = updatedBiomeData[biomeId];
-    const updatedHabitat = updatedBiome.habitats[habitatId];
-    let updatedCount = updatedHabitat.count;
-    if (updatedBiome) {
-      if (updatedHabitat) {
-        updatedCount -= 1;
-        setBiomeData(updatedCount);
+
+    // Check if the biomeId exists in the data
+    if (updatedBiomeData[biomeId]) {
+      const updatedHabitat = updatedBiomeData[biomeId].habitats[habitatId];
+
+      // Check if the habitatId exists within the biome
+      if (updatedHabitat && updatedHabitat.count > 0) {
+        // Increment the count for the specified habitat
+        updatedHabitat.count -= 1;
+
+        // Update the state with the modified data
+        setBiomeData(updatedBiomeData);
       }
     }
   };
