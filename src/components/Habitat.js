@@ -9,7 +9,8 @@ const Habitat = ({ selectedBiome, increment, decrement }) => {
       {Object.keys(habitats).map((habitatId) => {
           return (
             <HabitatList
-              key={habitatId} // Make sure to include a unique key when rendering in a loop
+              biomeId={selectedBiome.biomeId}
+              habitatId={habitatId} // Make sure to include a unique key when rendering in a loop
               increment={increment}
               decrement={decrement}
               habitat={habitats}

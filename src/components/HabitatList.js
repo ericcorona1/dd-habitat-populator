@@ -1,19 +1,23 @@
 import React from "react";
 
-const HabitatList = ({ increment, decrement, habitat }) => {
+const HabitatList = ({ increment, decrement, habitat, habitatId, biomeId }) => {
+  console.log(`Habitat: ${habitat[habitatId].habitatName}`);
+  console.log(habitat[habitatId].count);
+  console.log(`biomeId ${biomeId}`);
+  console.log(`habitat Id ${habitatId}`);
   return (
     <div className="habitat-container">
       <div className="habitatList">
-        <p>{}</p>
+        <p>{habitat[habitatId].habitatName}</p>
         <div className="buttonContainer">
           <button
             onClick={() => {
-              decrement(habitat.count);
+              decrement(biomeId, habitatId);
             }}
           >
             -
           </button>
-          <span className="counterOutput">{habitat.count}</span>
+          <span className="counterOutput">{habitat[habitatId].count}</span>
           {/* <input
                 type="number"
                 value={counterValues[selectedBiomeId][index]}
@@ -24,7 +28,7 @@ const HabitatList = ({ increment, decrement, habitat }) => {
               /> */}
           <button
             onClick={() => {
-              increment(habitat.count);
+              increment(biomeId, habitatId);
             }}
           >
             +

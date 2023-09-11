@@ -14,22 +14,22 @@ const Biome = ({ selectedBiome, biomeData, higlightBiomeIcon }) => {
       {Object.keys(biomeData).map((biomeId) => {
         let icon;
         switch (biomeId) {
-          case 1:
+          case '1':
             icon = <GiWaterDrop />;
             break;
-          case 2:
+          case '2':
             icon = <GiHighGrass />;
             break;
-          case 3:
+          case '3':
             icon = <GiPineTree />;
             break;
-          case 4:
+          case '4':
             icon = <GiFallingRocks />;
             break;
-          case 5:
+          case '5':
             icon = <GiSnowflake2 />;
             break;
-          case 6:
+          case '6':
             icon = <FaCity />;
             break;
           default:

@@ -6,10 +6,8 @@ const BiomeSelect = ({
   icon,
   biomeId,
 }) => {
-  const currentBiome = selectedBiome === biomeId ? "selected" : "";
+  const currentBiome = selectedBiome.biomeId === parseInt(biomeId) ? "selected" : "";
   const habitatObj = biomeData[biomeId].habitats;
-  console.log("habitat obj");
-  console.log(Object.values(habitatObj));
   const hasHabitatValues = Object.values(habitatObj).some(
     (habitat) => habitat.count !== 0
   )
