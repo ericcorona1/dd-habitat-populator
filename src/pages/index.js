@@ -1,9 +1,10 @@
 import * as React from "react";
 import Biome from "../components/Biome";
 import Habitat from "../components/Habitat";
-import OverlayList from "../components/OverlayList";
+import Overlay from "../components/Overlay";
 import { useState } from "react";
 import UpdatedBiomeJson from "../assets/data/updatedBiomes.json";
+import PokemonInHabitatsJson from "../assets/data/pokemon_habitat.json";
 import "../assets/css/main.css";
 
 const organizedData = UpdatedBiomeJson.reduce((acc, biome) => {
@@ -27,6 +28,45 @@ const organizedData = UpdatedBiomeJson.reduce((acc, biome) => {
 
   return acc;
 }, {});
+
+const populatePokemonInHabitats = (organizedData, pokemonData) => {
+  // Loop biomes
+  for (const biomeId in organizedData) {
+    const biome = organizedData[biomeId];
+
+    // Loop habitats in biome
+    for (const habitatId in biome.habitats) {
+      const habitat = biome.habitats[habitatId];
+
+      // group pokemon data for the habitat
+      const habitatPokemon = pokemonData.filter((pokemon) => {
+        return pokemon.habitat_id === habitat.habitatId;
+      });
+
+      // shuffle pokemon
+      for (
+        let currentIndex = habitatPokemon.length - 1;
+        currentIndex > 0;
+        currentIndex--
+      ) {
+        const randomIndex = Math.floor(Math.random() * (currentIndex + 1));
+        [habitatPokemon[currentIndex], habitatPokemon[randomIndex]] = [
+          habitatPokemon[randomIndex],
+          habitatPokemon[currentIndex],
+        ];
+      }
+      // assing to habitat
+      habitat.pokemon = habitatPokemon;
+    }
+  }
+  return organizedData;
+};
+
+const updatedOrganizedData = populatePokemonInHabitats(
+  organizedData,
+  PokemonInHabitatsJson
+);
+
 
 const IndexPage = () => {
   // state
@@ -91,8 +131,9 @@ const IndexPage = () => {
         increment={increment}
         decrement={decrement}
       />
-      <OverlayList 
-        biomeData={biomeData}
+      <Overlay 
+      biomeData={biomeData}
+      dataWithPokemon={updatedOrganizedData}
       />
 
       <footer>

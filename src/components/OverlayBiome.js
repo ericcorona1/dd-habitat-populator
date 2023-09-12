@@ -1,6 +1,8 @@
 import React from 'react'
+import OverlayHabitat from './OverlayHabitat'
 
-const RandomPokemonList = () => {
+const OverlayBiome = ({biome}) => {
+  const {biomeName, habitats} = biome;
 
     // step 1: get all biomes with values in their habitat
     // step 2: get all habitats with a value greater than 1
@@ -10,16 +12,15 @@ const RandomPokemonList = () => {
     return (
     <div>
         <h2>{biomeName}</h2>
-        <div>
-        {/* for each habitat with value */}
-        <h3>{habitatName}</h3>
-        <ul>
-        {/* random() while value */}
-        <li>{randomPokemon}</li>
-        </ul>
-        </div>
+        {habitats.map((habitat) => {
+        <OverlayHabitat 
+        key={habitat.habitatId}
+        habitatName={habitat.habitatName}
+        pokemons={habitat.pokemon}
+        />
+        })}
     </div>
   )
 }
 
-export default RandomPokemonList
+export default OverlayBiome;
