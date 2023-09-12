@@ -1,12 +1,13 @@
 import React from "react";
 
-const OverlayHabitat = ({ habitatName, pokemons }) => {
+const OverlayHabitat = ({ habitatName, pokemons, count }) => {
+  const listedPokemon = pokemons.slice(0, count);
   return (
     <div>
       <h3>{habitatName}</h3>
       <ul>
-        {pokemons.map((pokemon) => (
-          <li key={pokemon.pokemon_id}>{pokemon.name}</li>
+        {listedPokemon.map((pokemon) => (
+          <li key={pokemon.pokemon_id}>{pokemon.pokemon_id}</li>
         ))}
       </ul>
     </div>

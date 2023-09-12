@@ -2,12 +2,13 @@ import * as React from "react";
 import Biome from "../components/Biome";
 import Habitat from "../components/Habitat";
 import Overlay from "../components/Overlay";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import UpdatedBiomeJson from "../assets/data/updatedBiomes.json";
 import PokemonInHabitatsJson from "../assets/data/pokemon_habitat.json";
 import "../assets/css/main.css";
 
-const organizedData = UpdatedBiomeJson.reduce((acc, biome) => {
+// initial organization of biome data
+const initialOrganizedData = UpdatedBiomeJson.reduce((acc, biome) => {
   const { biome_id, biome_name, habitat_id, habitat_name, biome_description } =
     biome;
 
@@ -29,10 +30,10 @@ const organizedData = UpdatedBiomeJson.reduce((acc, biome) => {
   return acc;
 }, {});
 
-const populatePokemonInHabitats = (organizedData, pokemonData) => {
+const populatePokemonInHabitats = (initialOrganizedData, pokemonData) => {
   // Loop biomes
-  for (const biomeId in organizedData) {
-    const biome = organizedData[biomeId];
+  for (const biomeId in initialOrganizedData) {
+    const biome = initialOrganizedData[biomeId];
 
     // Loop habitats in biome
     for (const habitatId in biome.habitats) {
@@ -55,23 +56,73 @@ const populatePokemonInHabitats = (organizedData, pokemonData) => {
           habitatPokemon[currentIndex],
         ];
       }
-      // assing to habitat
+      // assign to habitat
       habitat.pokemon = habitatPokemon;
     }
   }
-  return organizedData;
+  return initialOrganizedData;
 };
-
-const updatedOrganizedData = populatePokemonInHabitats(
-  organizedData,
+// adds the pokemon to data
+const organizedData = populatePokemonInHabitats(
+  initialOrganizedData,
   PokemonInHabitatsJson
 );
-
 
 const IndexPage = () => {
   // state
   const [biomeData, setBiomeData] = useState(organizedData);
   const [selectedBiomeId, setSelectedBiomeId] = useState(1);
+  const [displayModal, setdisplayModal] = useState(false);
+  const [hasShuffled, setHasShuffled] = useState(false);
+
+  useEffect(() => {
+    // Function to shuffle the Pokemon data for a given biome
+    const shufflePokemonForBiome = (biomeId) => {
+      const updatedBiomeData = { ...biomeData };
+      const selectedBiome = updatedBiomeData[biomeId];
+
+      if (selectedBiome) {
+        for (const habitatId in selectedBiome.habitats) {
+          const habitat = selectedBiome.habitats[habitatId];
+
+          // Shuffle the Pokemon data for this habitat
+          const shuffledPokemon = [...habitat.pokemon];
+          for (
+            let currentIndex = shuffledPokemon.length - 1;
+            currentIndex > 0;
+            currentIndex--
+          ) {
+            const randomIndex = Math.floor(Math.random() * (currentIndex + 1));
+            [shuffledPokemon[currentIndex], shuffledPokemon[randomIndex]] = [
+              shuffledPokemon[randomIndex],
+              shuffledPokemon[currentIndex],
+            ];
+          }
+
+          // Update the habitat with shuffled data
+          habitat.pokemon = shuffledPokemon;
+        }
+
+        // Update the state with the shuffled data
+        setBiomeData(updatedBiomeData);
+        setHasShuffled(true); // Set the flag to prevent shuffling again
+      }
+    };
+
+    if (displayModal && !hasShuffled) {
+      // If the overlay is displayed and shuffling hasn't occurred, shuffle the Pokémon data for the selected biome
+      shufflePokemonForBiome(selectedBiomeId);
+    }
+  }, [displayModal, selectedBiomeId, biomeData, hasShuffled]);
+
+  const openModal = () => {
+    setdisplayModal("open");
+  };
+
+  const closeModal = () => {
+    setdisplayModal(false);
+    setHasShuffled(false);
+  };
 
   const highlightBiomeIcon = (biomeId) => {
     setSelectedBiomeId(biomeId);
@@ -131,9 +182,12 @@ const IndexPage = () => {
         increment={increment}
         decrement={decrement}
       />
-      <Overlay 
-      biomeData={biomeData}
-      dataWithPokemon={updatedOrganizedData}
+      <Overlay
+        biomeData={biomeData}
+        openModal={openModal}
+        closeModal={closeModal}
+        displayModal={displayModal}
+        hasShuffled={hasShuffled}
       />
 
       <footer>
