@@ -2,19 +2,6 @@ import React from "react";
 import { useState } from "react";
 import RandomPokemonList from "./RandomPokemonList";
 
-// const overlayContent = () => {
-//   return (
-//     <div>
-//       <h2>{data[0].category}</h2>
-//       <ul>
-//         {data.map((item) => (
-//           <li key={item.name}>{item.name}</li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
 const OverlayList = (biomeData) => {
 
 //   function filterByCategoryAndCount(data, category, count) {
