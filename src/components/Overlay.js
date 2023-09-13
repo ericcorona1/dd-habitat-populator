@@ -1,7 +1,7 @@
 import React from "react";
 import OverlayBiome from "./OverlayBiome";
 
-const Overlay = ({ biomeData, openModal, closeModal, displayModal, hasShuffled }) => {
+const Overlay = ({ biomeData, openModal, closeModal, displayModal }) => {
   return (
     <div>
       <button onClick={openModal}>Generate</button>
