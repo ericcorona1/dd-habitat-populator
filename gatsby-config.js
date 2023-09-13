@@ -39,5 +39,11 @@ module.exports = {
         icon: `src/images/swirl.png`,
       },
     },
+    {
+      resolve: `gatsby-source-pokeapi`,
+      options: {
+        nbOfPokemons: 1010,
+      },
+    },
   ],
 };
