@@ -1,6 +1,24 @@
+import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
+import { useStaticQuery, graphql } from "gatsby";
+
+const query = graphql`
+  query {
+    allPokemon {
+      nodes {
+        id
+        name
+        image
+      }
+      totalCount
+    }
+  }
+`;
 
 const OverlayHabitat = ({ habitatName, pokemons, count }) => {
+  const {
+    allPokemon: { nodes: pokemonData },
+  } = useStaticQuery(query);
   const listedPokemon = pokemons.slice(0, count);
   return (
     <div>
