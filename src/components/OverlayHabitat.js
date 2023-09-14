@@ -1,32 +1,35 @@
 import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
 
-const query = graphql`
-  query {
-    allPokemon {
-      nodes {
-        id
-        name
-        image
-      }
-      totalCount
-    }
-  }
-`;
+// 
 
 const OverlayHabitat = ({ habitatName, pokemons, count }) => {
-  const {
-    allPokemon: { nodes: pokemonData },
-  } = useStaticQuery(query);
+  // const {
+  //   allPokemon: { nodes: pokemonData },
+  // } = useStaticQuery(query);
+  // const findPokemonData = (pokemonId) => {
+  //   return pokemonData.find((pokemonCheck) => {
+  //     const adjustedId = pokemonCheck.id - 1; // Reduce pokemonCheck.id by one
+  //     console.log(pokemonCheck);
+  //     return adjustedId === pokemonId;
+  //   });
+  // };
+  
   const listedPokemon = pokemons.slice(0, count);
+  console.log(listedPokemon);
+
   return (
     <div>
       <h3>{habitatName}</h3>
       <ul>
-        {listedPokemon.map((pokemon) => (
-          <li key={pokemon.pokemon_id}>{pokemon.pokemon_id}</li>
-        ))}
+        {listedPokemon.map((listedPokemon) => {
+          // const foundPokemon = findPokemonData(listedPokemon.pokemon_id);
+          return (
+            <li key={listedPokemon.pokemon_id}>
+              {/* {listedPokemon.pokemon_id}:{foundPokemon && foundPokemon.name} */}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
