@@ -2,40 +2,41 @@ import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
 
 const query = graphql`
-query {
-  allPokemon {
-    nodes {
-      externalId
-      name
-      sprites {
-        front_default
-        other {
-          official_artwork {
-            front_default
+  query {
+    allPokemon {
+      nodes {
+        externalId
+        name
+        sprites {
+          front_default
+          other {
+            official_artwork {
+              front_default
+            }
           }
         }
-      }
-      types {
-        type {
-          name
+        types {
+          type {
+            name
+          }
+          slot
         }
-        slot
       }
+      totalCount
     }
-    totalCount
   }
-}
 `;
 
 const OverlayHabitat = ({ habitatName, pokemons, count }) => {
   const {
     allPokemon: { nodes: pokemonData },
   } = useStaticQuery(query);
-  console.log(pokemonData);
   const findPokemonData = (pokemonId) => {
-    return pokemonData.find((pokemonCheck) => pokemonCheck.externalId === pokemonId);
+    return pokemonData.find(
+      (pokemonCheck) => pokemonCheck.externalId === pokemonId
+    );
   };
-  
+
   const listedPokemon = pokemons.slice(0, count);
 
   return (
@@ -46,7 +47,15 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
           const foundPokemon = findPokemonData(listedPokemon.pokemon_id);
           return (
             <li key={listedPokemon.pokemon_id}>
-              {listedPokemon.pokemon_id}:{foundPokemon && foundPokemon.name}
+              <img
+                src={foundPokemon.sprites.front_default}
+                alt={foundPokemon.name}
+              />
+              <p>{foundPokemon && foundPokemon.name}</p>
+              <p>Type</p>
+              {foundPokemon.types.map((eachType) => {
+                return (<p>{eachType.type.name}</p>);
+              })}
             </li>
           );
         })}
