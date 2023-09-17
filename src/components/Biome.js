@@ -9,8 +9,9 @@ import { GiSnowflake2 } from "@react-icons/all-files/gi/GiSnowflake2";
 
 const Biome = ({ selectedBiome, biomeData, highlightBiomeIcon }) => {
   return (
-    <section className="biomeBtn-container">
+    <section className="biome">
       <h2>SELECT BIOME</h2>
+      <div className="allBtns">
       {Object.keys(biomeData).map((biomeId) => {
         let icon;
         switch (biomeId) {
@@ -45,6 +46,7 @@ const Biome = ({ selectedBiome, biomeData, highlightBiomeIcon }) => {
                   />
         );
       })}
+      </div>
       <h3>{selectedBiome.biomeName.toUpperCase()}</h3>
       <p>{selectedBiome.description}</p>
     </section>

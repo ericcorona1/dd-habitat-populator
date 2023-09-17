@@ -3,10 +3,10 @@ import OverlayBiome from "./OverlayBiome";
 
 const Overlay = ({ biomeData, openModal, closeModal, displayModal }) => {
   return (
-    <div>
+    <div className="generateBtn">
       <button onClick={openModal}>Generate</button>
       {displayModal && (
-        <dialog open>
+        <dialog className="overlay"open>
           <button onClick={closeModal}>Close</button>
           {Object.values(biomeData).map((biome) => {
             return <OverlayBiome key={biome.biomeId} biome={biome} />;
