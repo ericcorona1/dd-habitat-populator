@@ -3,10 +3,13 @@ import OverlayHabitat from "./OverlayHabitat";
 
 const OverlayBiome = ({ biome }) => {
   const { biomeName, habitats } = biome;
+  const habitatsWithCount = Object.values(habitats).filter(habitat => {
+    return habitat.count !== 0
+  })
   return (
     <div>
       <h2>{biomeName.toUpperCase()}</h2>
-      {Object.values(habitats).map((habitat) => {
+      {habitatsWithCount.map((habitat) => {
         return (
           <OverlayHabitat
             key={habitat.habitatId}
