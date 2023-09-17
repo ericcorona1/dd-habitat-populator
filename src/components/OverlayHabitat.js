@@ -73,9 +73,10 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
                 <td className="pokemonTypes">
                   {foundPokemon.types.map((eachType, index) => {
                     const type = eachType.type.name;
+                    const captialType = capitalizeFirstLetter(type);
                     return (
                       <span key={index} className="pokemonType">
-                        {type}
+                        {captialType}
                       </span>
                     );
                   })}
