@@ -167,16 +167,25 @@ const IndexPage = () => {
   };
 
   const handleNumberChange = (biomeId, habitatId, event) => {
-    console.log(event.target.value);
     const updatedBiomeData = { ...biomeData };
     if (updatedBiomeData[biomeId]) {
       const updatedHabitat = updatedBiomeData[biomeId].habitats[habitatId];
       if (updatedHabitat) {
         const newCount = parseFloat(event.target.value);
-        if (newCount === "") {
+        updatedHabitat.count = newCount;
+        setBiomeData(updatedBiomeData);
+      }
+    }
+  };
+
+  const onEmptyInput = (biomeId, habitatId) => {
+    const updatedBiomeData = { ...biomeData };
+    if (updatedBiomeData[biomeId]) {
+      const updatedHabitat = updatedBiomeData[biomeId].habitats[habitatId];
+      if (updatedHabitat) {
+        if (isNaN(updatedHabitat.count)) {
           updatedHabitat.count = 0;
         }
-        updatedHabitat.count = newCount;
         setBiomeData(updatedBiomeData);
       }
     }
@@ -198,6 +207,7 @@ const IndexPage = () => {
         increment={increment}
         decrement={decrement}
         handleNumberChange={handleNumberChange}
+        onEmptyInput={onEmptyInput}
       />
       <Overlay
         biomeData={biomeData}
