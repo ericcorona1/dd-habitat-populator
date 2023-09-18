@@ -1,7 +1,7 @@
 import React from "react";
 import HabitatList from "./HabitatList";
 
-const Habitat = ({ selectedBiome, increment, decrement }) => {
+const Habitat = ({ selectedBiome, increment, decrement, handleNumberChange }) => {
   const { habitats } = selectedBiome;
   return (
     <section>
@@ -14,6 +14,7 @@ const Habitat = ({ selectedBiome, increment, decrement }) => {
               increment={increment}
               decrement={decrement}
               habitat={habitats}
+              handleNumberChange={handleNumberChange}
             />
           );
         })

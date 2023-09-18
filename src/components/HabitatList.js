@@ -1,6 +1,13 @@
 import React from "react";
 
-const HabitatList = ({ increment, decrement, habitat, habitatId, biomeId }) => {
+const HabitatList = ({
+  increment,
+  decrement,
+  habitat,
+  habitatId,
+  biomeId,
+  handleNumberChange,
+}) => {
   return (
     <div className="habitat-container">
       <div className="habitatList">
@@ -13,15 +20,16 @@ const HabitatList = ({ increment, decrement, habitat, habitatId, biomeId }) => {
           >
             -
           </button>
-          <span className="counterOutput">{habitat[habitatId].count}</span>
-          {/* <input
-                type="number"
-                value={counterValues[selectedBiomeId][index]}
-                onChange={(event) => {
-                  // You may want to add validation or error handling here
-                  increment(index, parseInt(event.target.value, 10));
-                }}
-              /> */}
+          {/* <span className="counterOutput">{habitat[habitatId].count}</span> */}
+          <input
+            type="number"
+            value={habitat[habitatId].count}
+            onChange={(event) => {
+              handleNumberChange(biomeId, habitatId, event);
+            }}
+            min="0"
+            max={habitat[habitatId].pokemon.length}
+          />
           <button
             onClick={() => {
               increment(biomeId, habitatId);
