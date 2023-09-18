@@ -177,7 +177,6 @@ const IndexPage = () => {
       }
     }
   };
-
   const onEmptyInput = (biomeId, habitatId) => {
     const updatedBiomeData = { ...biomeData };
     if (updatedBiomeData[biomeId]) {
@@ -185,6 +184,9 @@ const IndexPage = () => {
       if (updatedHabitat) {
         if (isNaN(updatedHabitat.count)) {
           updatedHabitat.count = 0;
+        }
+        if (updatedHabitat.count > updatedHabitat.pokemon.length) {
+          updatedHabitat.count = updatedHabitat.pokemon.length;
         }
         setBiomeData(updatedBiomeData);
       }
