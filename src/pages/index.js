@@ -17,6 +17,7 @@ const initialOrganizedData = UpdatedBiomeJson.reduce((acc, biome) => {
       biomeId: biome_id, // Include biomeId here
       biomeName: biome_name,
       description: biome_description,
+      visible: true,
       habitats: {},
     };
   }
@@ -193,6 +194,14 @@ const IndexPage = () => {
     }
   };
 
+  const toggleBiomeVisibility = (biomeId) => {
+    const updatedBiomeData = { ...biomeData };
+    if (updatedBiomeData[biomeId]) {
+      updatedBiomeData[biomeId].visible = !updatedBiomeData[biomeId].visible;
+      setBiomeData(updatedBiomeData);
+    }
+  };
+
   // render
   return (
     <main>
@@ -217,6 +226,7 @@ const IndexPage = () => {
         closeModal={closeModal}
         displayModal={displayModal}
         hasShuffled={hasShuffled}
+        toggleBiomeVisibility={toggleBiomeVisibility}
       />
 
       <footer>

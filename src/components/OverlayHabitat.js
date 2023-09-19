@@ -27,7 +27,7 @@ const query = graphql`
   }
 `;
 
-const OverlayHabitat = ({ habitatName, pokemons, count }) => {
+const OverlayHabitat = ({ habitatName, pokemons, count, biomeVisible }) => {
   const {
     allPokemon: { nodes: pokemonData },
   } = useStaticQuery(query);
@@ -38,13 +38,12 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
   };
 
   const listedPokemon = pokemons.slice(0, count);
-
   const capitalizeFirstLetter = (name) => {
     return name[0].toUpperCase() + name.slice(1);
   };
 
   return (
-    <div className="habitatContainer">
+    <div className="habitatContainer" style={{display: biomeVisible ? 'block' : 'none'}}>
       <h3>{habitatName}</h3>
       <table className="pokemonTable">
         <thead>
