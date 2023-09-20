@@ -43,7 +43,7 @@ const OverlayHabitat = ({ habitatName, pokemons, count, biomeVisible }) => {
   };
 
   return (
-    <div className="habitatContainer" style={{display: biomeVisible ? 'block' : 'none'}}>
+    <div className="habitatContainer">
       <h3>{habitatName}</h3>
       <table className="pokemonTable">
         <thead>

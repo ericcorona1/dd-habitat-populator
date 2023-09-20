@@ -6,7 +6,6 @@ const Overlay = ({
   openModal,
   closeModal,
   displayModal,
-  toggleBiomeVisibility,
 }) => {
   const biomesWithCount = Object.values(biomeData).filter((biome) => {
     const habitats = biome.habitats;
@@ -23,7 +22,6 @@ const Overlay = ({
               <OverlayBiome
                 key={biome.biomeId}
                 biome={biome}
-                toggleBiomeVisibility={toggleBiomeVisibility}
               />
             );
           })}
