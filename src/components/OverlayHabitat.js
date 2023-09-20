@@ -71,7 +71,18 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
         <tbody>
           {listedPokemon.map((listedPokemon) => {
             const foundPokemon = findPokemonData(listedPokemon.pokemon_id);
-            console.log(foundPokemon);
+            const randomMoves = [];
+            let numberOfMoves = 4;
+            while (numberOfMoves > 0) {
+              const randomIndex = Math.floor(
+                Math.random() * foundPokemon.moves.length
+              );
+              const randomMove = foundPokemon.moves[randomIndex].move.name;
+              if (!randomMoves.includes(randomMove)) {
+                randomMoves.push(randomMove);
+                numberOfMoves--;
+              }
+            }
             const capitalName = capitalizeFirstLetter(foundPokemon.name);
 
             return (
@@ -102,7 +113,10 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
                     <div className="pokemonMoves">
                       <h4>Moves:</h4>
                       <ul>
-                        
+                        {randomMoves.map((move, index) => (
+
+                          <li key={index}>{move}</li>
+                        ))}
                       </ul>
                     </div>
                   </td>
