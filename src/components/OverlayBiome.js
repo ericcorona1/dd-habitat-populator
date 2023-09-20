@@ -7,16 +7,10 @@ const OverlayBiome = ({ biome, toggleBiomeVisibility }) => {
     return habitat.count !== 0;
   });
   return (
-    <div>
-      <h2 style={{ display: "inline-block" }}>{biomeName.toUpperCase()}</h2>
-      <button
-        style={{ display: "inline-block" }}
-        onClick={() => {
-          toggleBiomeVisibility(biome.biomeId);
-        }}
-      >
-        &#9662;
-      </button>
+    <details>
+      <summary className="biomeTitle">
+        {biomeName.toUpperCase()}
+      </summary>
       {habitatsWithCount.map((habitat) => {
         return (
           <OverlayHabitat
@@ -28,7 +22,7 @@ const OverlayBiome = ({ biome, toggleBiomeVisibility }) => {
           />
         );
       })}
-    </div>
+    </details>
   );
 };
 

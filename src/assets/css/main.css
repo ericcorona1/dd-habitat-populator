@@ -43,3 +43,8 @@
   display: flex;
   justify-content: space-between;
 }
+
+.biomeTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
