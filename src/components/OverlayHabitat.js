@@ -111,13 +111,17 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
                 <tr className="expandedRow">
                   <td colSpan={4}>
                     <div className="pokemonMoves">
-                      <h4>Moves:</h4>
+                      <details>
+                        <summary>
+                        Moves:
+                        </summary>
                       <ul>
                         {randomMoves.map((move, index) => (
-
+                          
                           <li key={index}>{move}</li>
-                        ))}
+                          ))}
                       </ul>
+                          </details>
                     </div>
                   </td>
                 </tr>

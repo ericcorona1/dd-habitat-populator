@@ -44,3 +44,7 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+.pokemonMoves {
+  cursor: pointer;
+}
