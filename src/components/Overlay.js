@@ -11,9 +11,11 @@ const Overlay = ({ biomeData, openModal, closeModal, displayModal }) => {
       <button onClick={openModal}>Generate</button>
       {displayModal && (
         <dialog className="overlay" open>
+          <div className="closeBtnWrapper">
           <button onClick={closeModal} className="overlayCloseBtn">
             Close
           </button>
+          </div>
           {biomesWithCount.map((biome) => {
             return <OverlayBiome key={biome.biomeId} biome={biome} />;
           })}

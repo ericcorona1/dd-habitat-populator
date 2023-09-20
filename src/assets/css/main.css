@@ -33,10 +33,14 @@
   overflow: scroll;
 }
 
+.closeBtnWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .overlayCloseBtn {
-  padding: 5px;
-  width: 80%;
-  margin: 10px 0;
+  width: 100%;
 }
 
 .biomeTitle {
