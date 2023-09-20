@@ -33,18 +33,14 @@
   overflow: scroll;
 }
 
-.habitatContainer ul {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-
-.habitatContainer ul li {
-  display: flex;
-  justify-content: space-between;
+.overlayCloseBtn {
+  padding: 5px;
+  width: 80%;
+  margin: 10px 0;
 }
 
 .biomeTitle {
   font-size: 1.5rem;
   font-weight: bold;
+  cursor: pointer;
 }

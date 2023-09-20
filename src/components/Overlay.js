@@ -1,12 +1,7 @@
 import React from "react";
 import OverlayBiome from "./OverlayBiome";
 
-const Overlay = ({
-  biomeData,
-  openModal,
-  closeModal,
-  displayModal,
-}) => {
+const Overlay = ({ biomeData, openModal, closeModal, displayModal }) => {
   const biomesWithCount = Object.values(biomeData).filter((biome) => {
     const habitats = biome.habitats;
     return Object.values(habitats).some((habitat) => habitat.count !== 0);
@@ -16,15 +11,15 @@ const Overlay = ({
       <button onClick={openModal}>Generate</button>
       {displayModal && (
         <dialog className="overlay" open>
-          <button onClick={closeModal}>Close</button>
+          <button onClick={closeModal} className="overlayCloseBtn">
+            Close
+          </button>
           {biomesWithCount.map((biome) => {
-            return (
-              <OverlayBiome
-                key={biome.biomeId}
-                biome={biome}
-              />
-            );
+            return <OverlayBiome key={biome.biomeId} biome={biome} />;
           })}
+          <button onClick={closeModal} className="overlayCloseBtn">
+            Close
+          </button>
         </dialog>
       )}
     </div>
