@@ -10,6 +10,10 @@
   gap: 2px;
 }
 
+/* .button-container {
+  flex-grow: 1;
+} */
+
 .selected {
   border-style: solid;
   border-color: blue;
