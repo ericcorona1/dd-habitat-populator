@@ -3,10 +3,16 @@ import React from "react";
 
 const query = graphql`
   query {
-    allPokemon {
+    allPokemon(limit: 10) {
       nodes {
         externalId
         name
+        types {
+          type {
+            name
+          }
+          slot
+        }
         sprites {
           front_default
           other {
@@ -14,12 +20,21 @@ const query = graphql`
               front_default
             }
           }
+          versions {
+            generation_viii {
+              icons {
+                front_default
+              }
+            }
+          }
         }
-        types {
-          type {
+        moves {
+          move {
             name
           }
-          slot
+          version_group_details {
+            level_learned_at
+          }
         }
       }
       totalCount
@@ -60,27 +75,32 @@ const OverlayHabitat = ({ habitatName, pokemons, count, biomeVisible }) => {
             const capitalName = capitalizeFirstLetter(foundPokemon.name);
 
             return (
-              <tr key={listedPokemon.pokemon_id} className="pokemonRow">
-                <td className="pokemonId">#{foundPokemon.externalId}</td>
-                <td className="pokemonImage">
-                  <img
-                    src={foundPokemon.sprites.front_default}
-                    alt={foundPokemon.name}
-                  />
-                </td>
-                <td className="pokemonName">{foundPokemon && capitalName}</td>
-                <td className="pokemonTypes">
-                  {foundPokemon.types.map((eachType, index) => {
-                    const type = eachType.type.name;
-                    const captialType = capitalizeFirstLetter(type);
-                    return (
-                      <span key={index} className="pokemonType">
-                        {captialType}
-                      </span>
-                    );
-                  })}
-                </td>
-              </tr>
+              <>
+                <tr key={listedPokemon.pokemon_id} className="pokemonRow">
+                  <td className="pokemonId">#{foundPokemon.externalId}</td>
+                  <td className="pokemonImage">
+                    <img
+                      src={foundPokemon.sprites.front_default}
+                      alt={foundPokemon.name}
+                    />
+                  </td>
+                  <td className="pokemonName">{foundPokemon && capitalName}</td>
+                  <td className="pokemonTypes">
+                    {foundPokemon.types.map((eachType, index) => {
+                      const type = eachType.type.name;
+                      const captialType = capitalizeFirstLetter(type);
+                      return (
+                        <span key={index} className="pokemonType">
+                          {captialType}
+                        </span>
+                      );
+                    })}
+                  </td>
+                </tr>
+                <tr className="expandedRow">
+                  <td colSpan={4}></td>
+                </tr>
+              </>
             );
           })}
         </tbody>
