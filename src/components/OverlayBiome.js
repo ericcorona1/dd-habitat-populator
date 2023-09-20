@@ -7,7 +7,7 @@ const OverlayBiome = ({ biome, toggleBiomeVisibility }) => {
     return habitat.count !== 0;
   });
   return (
-    <details>
+    <details open>
       <summary className="biomeTitle">
         {biomeName.toUpperCase()}
       </summary>
