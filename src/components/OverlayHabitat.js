@@ -3,7 +3,7 @@ import React from "react";
 
 const query = graphql`
   query {
-    allPokemon(limit: 10) {
+    allPokemon {
       nodes {
         externalId
         name
@@ -42,7 +42,7 @@ const query = graphql`
   }
 `;
 
-const OverlayHabitat = ({ habitatName, pokemons, count, biomeVisible }) => {
+const OverlayHabitat = ({ habitatName, pokemons, count }) => {
   const {
     allPokemon: { nodes: pokemonData },
   } = useStaticQuery(query);
@@ -51,7 +51,6 @@ const OverlayHabitat = ({ habitatName, pokemons, count, biomeVisible }) => {
       (pokemonCheck) => pokemonCheck.externalId === pokemonId
     );
   };
-
   const listedPokemon = pokemons.slice(0, count);
   const capitalizeFirstLetter = (name) => {
     return name[0].toUpperCase() + name.slice(1);
@@ -72,6 +71,7 @@ const OverlayHabitat = ({ habitatName, pokemons, count, biomeVisible }) => {
         <tbody>
           {listedPokemon.map((listedPokemon) => {
             const foundPokemon = findPokemonData(listedPokemon.pokemon_id);
+            console.log(foundPokemon);
             const capitalName = capitalizeFirstLetter(foundPokemon.name);
 
             return (
@@ -98,7 +98,14 @@ const OverlayHabitat = ({ habitatName, pokemons, count, biomeVisible }) => {
                   </td>
                 </tr>
                 <tr className="expandedRow">
-                  <td colSpan={4}></td>
+                  <td colSpan={4}>
+                    <div className="pokemonMoves">
+                      <h4>Moves:</h4>
+                      <ul>
+                        
+                      </ul>
+                    </div>
+                  </td>
                 </tr>
               </>
             );

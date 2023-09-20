@@ -193,14 +193,6 @@ const IndexPage = () => {
     }
   };
 
-  const toggleBiomeVisibility = (biomeId) => {
-    const updatedBiomeData = { ...biomeData };
-    if (updatedBiomeData[biomeId]) {
-      updatedBiomeData[biomeId].visible = !updatedBiomeData[biomeId].visible;
-      setBiomeData(updatedBiomeData);
-    }
-  };
-
   // render
   return (
     <main>
