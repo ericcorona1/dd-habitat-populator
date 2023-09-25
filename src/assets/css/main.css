@@ -93,10 +93,6 @@ main {
   cursor: pointer;
 }
 
-.pokemonMoves li {
-  list-style-type: none;
-}
-
 .types {
   display: flex;
   flex-direction: column;
