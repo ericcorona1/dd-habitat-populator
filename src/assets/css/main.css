@@ -40,7 +40,12 @@
 }
 
 .generateBtn {
+  display: flex;
   padding-top: 20px;
+}
+
+.generateBtn button {
+  flex: auto;
 }
 
 .overlay {
