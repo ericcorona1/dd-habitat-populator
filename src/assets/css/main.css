@@ -7,12 +7,17 @@
 .allBtns {
   display: flex;
   flex-wrap: wrap;
-  gap: 2px;
+  justify-content: space-around;
+  gap: 2%;
 }
 
-/* .button-container {
-  flex-grow: 1;
-} */
+.button-container {
+  flex: auto;
+}
+
+.button-container button {
+  justify-content: center;
+}
 
 .selected {
   border-style: solid;
