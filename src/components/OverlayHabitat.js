@@ -112,16 +112,14 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
                   <td colSpan={4}>
                     <div className="pokemonMoves">
                       <details>
-                        <summary>
-                        Moves:
-                        </summary>
-                      <ul>
-                        {randomMoves.map((move, index) => (
-                          
-                          <li key={index}>{move}</li>
-                          ))}
-                      </ul>
-                          </details>
+                        <summary>Moves:</summary>
+                        <ul>
+                          {randomMoves.map((move, index) => {
+                            const captitalMove = capitalizeFirstLetter(move);
+                            return <li key={index}>{captitalMove}</li>;
+                          })}
+                        </ul>
+                      </details>
                     </div>
                   </td>
                 </tr>
