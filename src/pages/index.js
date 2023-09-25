@@ -72,7 +72,6 @@ const IndexPage = () => {
   // state
   const [biomeData, setBiomeData] = useState(organizedData);
   const [selectedBiomeId, setSelectedBiomeId] = useState(1);
-  const [displayModal, setdisplayModal] = useState(false);
   const [hasShuffled, setHasShuffled] = useState(false);
 
   useEffect(() => {
@@ -109,20 +108,11 @@ const IndexPage = () => {
       }
     };
 
-    if (displayModal && !hasShuffled) {
+    if (!hasShuffled) {
       // If the overlay is displayed and shuffling hasn't occurred, shuffle the Pokémon data for the selected biome
       shufflePokemonForBiome(selectedBiomeId);
     }
-  }, [displayModal, selectedBiomeId, biomeData, hasShuffled]);
-
-  const openModal = () => {
-    setdisplayModal("open");
-  };
-
-  const closeModal = () => {
-    setdisplayModal(false);
-    setHasShuffled(false);
-  };
+  }, [selectedBiomeId, biomeData, hasShuffled]);
 
   const highlightBiomeIcon = (biomeId) => {
     setSelectedBiomeId(biomeId);
@@ -211,13 +201,7 @@ const IndexPage = () => {
         handleNumberChange={handleNumberChange}
         onEmptyInput={onEmptyInput}
       />
-      <Overlay
-        biomeData={biomeData}
-        openModal={openModal}
-        closeModal={closeModal}
-        displayModal={displayModal}
-        hasShuffled={hasShuffled}
-      />
+      <Overlay biomeData={biomeData} hasShuffled={hasShuffled} />
 
       <footer>
         <p>

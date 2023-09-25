@@ -63,6 +63,10 @@ main {
   overflow: scroll;
 }
 
+.overlay::backdrop {
+  backdrop-filter: blur(5px);
+}
+
 .closeBtnWrapper {
   display: flex;
   justify-content: center;
