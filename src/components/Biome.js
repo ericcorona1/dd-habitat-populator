@@ -9,7 +9,7 @@ import { GiSnowflake2 } from "@react-icons/all-files/gi/GiSnowflake2";
 
 const Biome = ({ selectedBiome, biomeData, highlightBiomeIcon }) => {
   return (
-    <section className="biome">
+    <section className="biomeSection">
       <h2>SELECT BIOME</h2>
       <div className="allBtns">
       {Object.keys(biomeData).map((biomeId) => {

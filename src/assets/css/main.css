@@ -29,6 +29,16 @@
   background-color: lightblue;
 }
 
+.counterInput {
+  display: flex;
+  justify-content: space-around;
+  gap: 2%;
+}
+
+.counterInput > * {
+  flex: auto;
+}
+
 .generateBtn {
   padding-top: 20px;
 }

@@ -22,7 +22,8 @@ const BiomeSelect = ({
         }}
         key={biomeId}
         value={biomeId}
-        className="button-container"
+        // className="button-container"
+        className={`button-container ${currentBiome} ${hasHabitatValues}`}
       >
         {icon}
       </button>
