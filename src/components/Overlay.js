@@ -27,7 +27,6 @@ const Overlay = ({ biomeData }) => {
     <div>
       <div className="generateBtn">
         <button onClick={openModal}>Generate</button>
-        overlay
       </div>
       <dialog ref={dialogRef} className="overlay">
         <div className="closeBtnWrapper">
