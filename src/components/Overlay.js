@@ -37,11 +37,6 @@ const Overlay = ({ biomeData }) => {
         {biomesWithCount.map((biome) => {
           return <OverlayBiome key={biome.biomeId} biome={biome} />;
         })}
-        {/* <div className="closeBtnWrapper">
-          <button onClick={closeModal} className="overlayCloseBtn">
-            Close
-          </button>
-        </div> */}
       </dialog>
     </div>
   );
