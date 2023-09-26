@@ -46,21 +46,20 @@ main {
 
 .generateBtn {
   display: flex;
-  padding-top: 20px;
+  height: 50px;
+  margin: 20px 0;
 }
 
 .generateBtn button {
   flex: auto;
+  height: 100%;
 }
 
 .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
   max-width: 500px;
   overflow: scroll;
+  padding: 0;
 }
 
 .overlay::backdrop {
@@ -68,14 +67,20 @@ main {
 }
 
 .closeBtnWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px 0;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  height: 50px;
 }
 
 .overlayCloseBtn {
   width: 100%;
+  height: 100%;
+}
+
+.overlay > details {
+  position: relative;
+  top: 30px;
 }
 
 .biomeTitle {
