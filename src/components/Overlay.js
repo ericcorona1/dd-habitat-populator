@@ -4,20 +4,6 @@ import OverlayBiome from "./OverlayBiome";
 const Overlay = ({ biomeData, openModal, closeModal }) => {
   const dialogRef = useRef(null);
 
-  const openModal = () => {
-    // Access the DOM element using useRef and call showModal()
-    if (dialogRef.current) {
-      dialogRef.current.showModal();
-    }
-  };
-
-  const closeModal = () => {
-    // Access the DOM element using useRef and call close()
-    if (dialogRef.current) {
-      dialogRef.current.close();
-    }
-  };
-
   const biomesWithCount = Object.values(biomeData).filter((biome) => {
     const habitats = biome.habitats;
     return Object.values(habitats).some((habitat) => habitat.count !== 0);
