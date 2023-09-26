@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import OverlayBiome from "./OverlayBiome";
 
-const Overlay = ({ biomeData, onCloseModal }) => {
+const Overlay = ({ biomeData, reshuffle }) => {
   const dialogRef = useRef(null);
 
   const openModal = () => {
@@ -33,7 +33,7 @@ const Overlay = ({ biomeData, onCloseModal }) => {
           <button
             onClick={() => {
               closeModal();
-              onCloseModal();
+              reshuffle();
             }}
             className="overlayCloseBtn"
           >
