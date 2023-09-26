@@ -1,8 +1,22 @@
 import React, { useRef } from "react";
 import OverlayBiome from "./OverlayBiome";
 
-const Overlay = ({ biomeData, openModal, closeModal }) => {
+const Overlay = ({ biomeData, onCloseModal }) => {
   const dialogRef = useRef(null);
+
+  const openModal = () => {
+    // Access the DOM element using useRef and call showModal()
+    if (dialogRef.current) {
+      dialogRef.current.showModal();
+    }
+  };
+
+  const closeModal = () => {
+    // Access the DOM element using useRef and call close()
+    if (dialogRef.current) {
+      dialogRef.current.close();
+    }
+  };
 
   const biomesWithCount = Object.values(biomeData).filter((biome) => {
     const habitats = biome.habitats;
@@ -16,7 +30,13 @@ const Overlay = ({ biomeData, openModal, closeModal }) => {
       </div>
       <dialog ref={dialogRef} className="overlay">
         <div className="closeBtnWrapper">
-          <button onClick={closeModal} className="overlayCloseBtn">
+          <button
+            onClick={() => {
+              closeModal();
+              onCloseModal();
+            }}
+            className="overlayCloseBtn"
+          >
             Close
           </button>
         </div>
