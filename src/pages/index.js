@@ -183,7 +183,7 @@ const IndexPage = () => {
     }
   };
 
-  const onCloseModal = () => {
+  const reShuffle = () => {
     setHasShuffled(false);
   };
 
@@ -208,7 +208,7 @@ const IndexPage = () => {
       <Overlay
         biomeData={biomeData}
         hasShuffled={hasShuffled}
-        onCloseModal={onCloseModal}
+        reShuffle={reShuffle}
       />
 
       <footer>
