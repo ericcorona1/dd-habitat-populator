@@ -114,6 +114,21 @@ const IndexPage = () => {
     }
   }, [selectedBiomeId, biomeData, hasShuffled]);
 
+  const openModal = () => {
+    // Access the DOM element using useRef and call showModal()
+    if (dialogRef.current) {
+      dialogRef.current.showModal();
+    }
+  };
+
+  const closeModal = () => {
+    // Access the DOM element using useRef and call close()
+    if (dialogRef.current) {
+      dialogRef.current.close();
+    }
+    setHasShuffled(false);
+  };
+
   const highlightBiomeIcon = (biomeId) => {
     setSelectedBiomeId(biomeId);
   };
@@ -201,7 +216,12 @@ const IndexPage = () => {
         handleNumberChange={handleNumberChange}
         onEmptyInput={onEmptyInput}
       />
-      <Overlay biomeData={biomeData} hasShuffled={hasShuffled} />
+      <Overlay
+        biomeData={biomeData}
+        hasShuffled={hasShuffled}
+        openModal={openModal}
+        closeModal={closeModal}
+      />
 
       <footer>
         <p>

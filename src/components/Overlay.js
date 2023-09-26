@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import OverlayBiome from "./OverlayBiome";
 
-const Overlay = ({ biomeData }) => {
+const Overlay = ({ biomeData, openModal, closeModal }) => {
   const dialogRef = useRef(null);
 
   const openModal = () => {
