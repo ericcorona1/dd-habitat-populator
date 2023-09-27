@@ -78,6 +78,13 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
     return name[0].toUpperCase() + name.slice(1);
   };
 
+  const {
+    allMove: { nodes: moveData },
+  } = useStaticQuery(moveQuery);
+  const findMoveData = (moveName) => {
+    return moveData.find((moveCheck) => moveCheck.name === moveName);
+  };
+
   return (
     <div className="habitatContainer">
       <h3>{habitatName}</h3>
