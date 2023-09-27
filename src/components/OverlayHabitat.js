@@ -42,6 +42,29 @@ const pokemonQuery = graphql`
   }
 `;
 
+const moveQuery = graphql`
+  query {
+    allMove(
+      limit: 10
+      filter: {
+        flavor_text_entries: { elemMatch: { language: { name: { eq: "en" } } } }
+      }
+    ) {
+      nodes {
+        name
+        flavor_text_entries {
+          flavor_text
+          language {
+            name
+          }
+        }
+        power
+        externalId
+      }
+    }
+  }
+`;
+
 const OverlayHabitat = ({ habitatName, pokemons, count }) => {
   const {
     allPokemon: { nodes: pokemonData },
