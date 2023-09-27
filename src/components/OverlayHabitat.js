@@ -144,20 +144,24 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
                         <ul>
                           {randomMoves.map((move, index) => {
                             const foundMove = findMoveData(move);
-                            const flavorTextEn =
-                              foundMove.flavor_text_entries.find(
-                                (language) => language.name === "en"
+                            let enFlavorText;
+                            const enFlavorTextEntries =
+                              foundMove.flavor_text_entries.filter(
+                                (flavorText) =>
+                                  flavorText.language.name === "en"
                               );
-                            console.log("found move: ");
-                            console.log(foundMove);
+                            if (enFlavorTextEntries.length > 0) {
+                              const randomIndex = Math.floor(
+                                Math.random() * enFlavorTextEntries.length
+                              );
+                              const randomEnFlavorText =
+                                enFlavorTextEntries[randomIndex];
+                            }
                             const captitalMove = capitalizeFirstLetter(move);
                             return (
                               <li key={index}>
                                 <p>{captitalMove}</p>
-                                <p>
-                                  Lorem ipsum dolor sit, amet consectetur
-                                  adipisicing elit. Quia, reiciendis?
-                                </p>
+                                <p>{}</p>
                               </li>
                             );
                           })}
