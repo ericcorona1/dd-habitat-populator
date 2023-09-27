@@ -1,7 +1,7 @@
 import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
 
-const Query = graphql`
+const query = graphql`
   query {
     allPokemon {
       nodes {
@@ -62,7 +62,8 @@ const Query = graphql`
 const OverlayHabitat = ({ habitatName, pokemons, count }) => {
   const {
     allPokemon: { nodes: pokemonData },
-  } = useStaticQuery(pokemonQuery);
+  } = useStaticQuery(query);
+
   const findPokemonData = (pokemonId) => {
     return pokemonData.find(
       (pokemonCheck) => pokemonCheck.externalId === pokemonId
@@ -75,7 +76,8 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
 
   const {
     allMove: { nodes: moveData },
-  } = useStaticQuery(moveQuery);
+  } = useStaticQuery(query);
+
   const findMoveData = (moveName) => {
     return moveData.find((moveCheck) => moveCheck.name === moveName);
   };
@@ -141,10 +143,23 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
                         <summary>Moves:</summary>
                         <ul>
                           {randomMoves.map((move, index) => {
-                            const foundMoves = findMoveData(move);
-                            console.log(foundMoves);
+                            const foundMove = findMoveData(move);
+                            const flavorTextEn =
+                              foundMove.flavor_text_entries.find(
+                                (language) => language.name === "en"
+                              );
+                            console.log("found move: ");
+                            console.log(foundMove);
                             const captitalMove = capitalizeFirstLetter(move);
-                            return <li key={index}>{captitalMove}</li>;
+                            return (
+                              <li key={index}>
+                                <p>{captitalMove}</p>
+                                <p>
+                                  Lorem ipsum dolor sit, amet consectetur
+                                  adipisicing elit. Quia, reiciendis?
+                                </p>
+                              </li>
+                            );
                           })}
                         </ul>
                       </details>
