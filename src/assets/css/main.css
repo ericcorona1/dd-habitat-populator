@@ -60,6 +60,7 @@ main {
   max-width: 500px;
   overflow: scroll;
   padding: 0;
+  height: 100%;
 }
 
 .overlay::backdrop {
