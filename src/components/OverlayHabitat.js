@@ -39,11 +39,7 @@ const query = graphql`
       }
       totalCount
     }
-    allMove(
-      filter: {
-        flavor_text_entries: { elemMatch: { language: { name: { eq: "en" } } } }
-      }
-    ) {
+    allMove {
       nodes {
         name
         flavor_text_entries {
@@ -144,24 +140,31 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
                         <ul>
                           {randomMoves.map((move, index) => {
                             const foundMove = findMoveData(move);
-                            let enFlavorText;
-                            const enFlavorTextEntries =
-                              foundMove.flavor_text_entries.filter(
-                                (flavorText) =>
-                                  flavorText.language.name === "en"
-                              );
-                            if (enFlavorTextEntries.length > 0) {
-                              const randomIndex = Math.floor(
-                                Math.random() * enFlavorTextEntries.length
-                              );
-                              const randomEnFlavorText =
-                                enFlavorTextEntries[randomIndex];
-                            }
+                            let randomEnFlavorText;
+
+                            const fetchRandomEnFlavorText = async () => {
+                              const enFlavorTextEntries =
+                                foundMove.flavor_text_entries.filter(
+                                  (flavorText) =>
+                                    flavorText.language.name === "en"
+                                );
+                              if (enFlavorTextEntries.length > 0) {
+                                const randomIndex = Math.floor(
+                                  Math.random() * enFlavorTextEntries.length
+                                );
+                                randomEnFlavorText =
+                                  enFlavorTextEntries[randomIndex];
+                              } else {
+                                randomEnFlavorText =
+                                  "No English description available";
+                              }
+                            };
+                            fetchRandomEnFlavorText();
                             const captitalMove = capitalizeFirstLetter(move);
                             return (
                               <li key={index}>
                                 <p>{captitalMove}</p>
-                                <p>{}</p>
+                                <p>{randomEnFlavorText.flavor_text}</p>
                               </li>
                             );
                           })}
