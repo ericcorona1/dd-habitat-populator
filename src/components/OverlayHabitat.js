@@ -1,7 +1,7 @@
 import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
 
-const query = graphql`
+const pokemonQuery = graphql`
   query {
     allPokemon {
       nodes {
@@ -45,7 +45,7 @@ const query = graphql`
 const OverlayHabitat = ({ habitatName, pokemons, count }) => {
   const {
     allPokemon: { nodes: pokemonData },
-  } = useStaticQuery(query);
+  } = useStaticQuery(pokemonQuery);
   const findPokemonData = (pokemonId) => {
     return pokemonData.find(
       (pokemonCheck) => pokemonCheck.externalId === pokemonId
