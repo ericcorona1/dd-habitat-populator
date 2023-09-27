@@ -74,6 +74,8 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
     allMove: { nodes: moveData },
   } = useStaticQuery(query);
 
+  console.log(moveData.power);
+
   const findMoveData = (moveName) => {
     return moveData.find((moveCheck) => moveCheck.name === moveName);
   };

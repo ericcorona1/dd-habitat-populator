@@ -82,6 +82,7 @@ main {
 .overlay > details {
   position: relative;
   top: 30px;
+  padding: 0 5px;
 }
 
 .biomeTitle {
