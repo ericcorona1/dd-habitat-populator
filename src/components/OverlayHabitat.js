@@ -1,7 +1,7 @@
 import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
 
-const pokemonQuery = graphql`
+const Query = graphql`
   query {
     allPokemon {
       nodes {
@@ -39,11 +39,6 @@ const pokemonQuery = graphql`
       }
       totalCount
     }
-  }
-`;
-
-const moveQuery = graphql`
-  query {
     allMove(
       filter: {
         flavor_text_entries: { elemMatch: { language: { name: { eq: "en" } } } }
@@ -146,6 +141,8 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
                         <summary>Moves:</summary>
                         <ul>
                           {randomMoves.map((move, index) => {
+                            const foundMoves = findMoveData(move);
+                            console.log(foundMoves);
                             const captitalMove = capitalizeFirstLetter(move);
                             return <li key={index}>{captitalMove}</li>;
                           })}
