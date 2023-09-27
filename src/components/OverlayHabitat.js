@@ -45,7 +45,6 @@ const pokemonQuery = graphql`
 const moveQuery = graphql`
   query {
     allMove(
-      limit: 10
       filter: {
         flavor_text_entries: { elemMatch: { language: { name: { eq: "en" } } } }
       }
