@@ -74,7 +74,8 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
     allMove: { nodes: moveData },
   } = useStaticQuery(query);
 
-  console.log(moveData.power);
+  console.log("-----");
+  console.log(moveData);
 
   const findMoveData = (moveName) => {
     return moveData.find((moveCheck) => moveCheck.name === moveName);
@@ -143,6 +144,8 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
                           {randomMoves.map((move, index) => {
                             const foundMove = findMoveData(move);
                             let randomEnFlavorText;
+                            console.log("power total");
+                            console.log(foundMove.power);
 
                             const fetchRandomEnFlavorText = async () => {
                               const enFlavorTextEntries =
@@ -166,6 +169,11 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
                             return (
                               <li key={index}>
                                 <p>{captitalMove}</p>
+                                {foundMove.power ? (
+                                  <p>Power: {foundMove.power}</p>
+                                ) : (
+                                  ""
+                                )}
                                 <p>{randomEnFlavorText.flavor_text}</p>
                               </li>
                             );
