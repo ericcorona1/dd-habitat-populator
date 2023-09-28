@@ -104,6 +104,10 @@ main {
   cursor: pointer;
 }
 
+.pokemonMoves > details {
+  max-width: 440px;
+}
+
 .types {
   display: flex;
   flex-direction: column;
@@ -112,5 +116,4 @@ main {
 .powerMoveWrapper {
   display: flex;
   justify-content: space-between;
-  max-width: 400px;
 }
