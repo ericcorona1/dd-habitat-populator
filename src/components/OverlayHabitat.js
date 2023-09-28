@@ -168,12 +168,14 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
                             const captitalMove = capitalizeFirstLetter(move);
                             return (
                               <li key={index}>
-                                <p>{captitalMove}</p>
-                                {foundMove.power ? (
-                                  <p>Power: {foundMove.power}</p>
-                                ) : (
-                                  ""
-                                )}
+                                <div className="powerMoveWrapper">
+                                  <p>{captitalMove}</p>
+                                  {foundMove.power ? (
+                                    <p>Power: {foundMove.power}</p>
+                                  ) : (
+                                    ""
+                                  )}
+                                </div>
                                 <p>{randomEnFlavorText.flavor_text}</p>
                               </li>
                             );
