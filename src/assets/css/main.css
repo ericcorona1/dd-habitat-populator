@@ -44,6 +44,10 @@ main {
   flex: auto;
 }
 
+.counterInput > button {
+  height: 50px;
+}
+
 .generateBtn {
   display: flex;
   height: 50px;
