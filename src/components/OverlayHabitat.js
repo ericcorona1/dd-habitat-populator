@@ -137,52 +137,50 @@ const OverlayHabitat = ({ habitatName, pokemons, count }) => {
                 </tr>
                 <tr className="expandedRow">
                   <td colSpan={4}>
-                    <div className="pokemonMoves">
-                      <details>
-                        <summary>Moves:</summary>
-                        <ul>
-                          {randomMoves.map((move, index) => {
-                            const foundMove = findMoveData(move);
-                            let randomEnFlavorText;
-                            console.log("power total");
-                            console.log(foundMove.power);
+                    <details className="pokemonMoves">
+                      <summary>Moves:</summary>
+                      <ul>
+                        {randomMoves.map((move, index) => {
+                          const foundMove = findMoveData(move);
+                          let randomEnFlavorText;
+                          console.log("power total");
+                          console.log(foundMove.power);
 
-                            const fetchRandomEnFlavorText = async () => {
-                              const enFlavorTextEntries =
-                                foundMove.flavor_text_entries.filter(
-                                  (flavorText) =>
-                                    flavorText.language.name === "en"
-                                );
-                              if (enFlavorTextEntries.length > 0) {
-                                const randomIndex = Math.floor(
-                                  Math.random() * enFlavorTextEntries.length
-                                );
-                                randomEnFlavorText =
-                                  enFlavorTextEntries[randomIndex];
-                              } else {
-                                randomEnFlavorText =
-                                  "No English description available";
-                              }
-                            };
-                            fetchRandomEnFlavorText();
-                            const captitalMove = capitalizeFirstLetter(move);
-                            return (
-                              <li key={index}>
-                                <div className="powerMoveWrapper">
-                                  <p>{captitalMove}</p>
-                                  {foundMove.power ? (
-                                    <p>Power: {foundMove.power}</p>
-                                  ) : (
-                                    ""
-                                  )}
-                                </div>
-                                <p>{randomEnFlavorText.flavor_text}</p>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </details>
-                    </div>
+                          const fetchRandomEnFlavorText = async () => {
+                            const enFlavorTextEntries =
+                              foundMove.flavor_text_entries.filter(
+                                (flavorText) =>
+                                  flavorText.language.name === "en"
+                              );
+                            if (enFlavorTextEntries.length > 0) {
+                              const randomIndex = Math.floor(
+                                Math.random() * enFlavorTextEntries.length
+                              );
+                              randomEnFlavorText =
+                                enFlavorTextEntries[randomIndex];
+                            } else {
+                              randomEnFlavorText =
+                                "No English description available";
+                            }
+                          };
+                          fetchRandomEnFlavorText();
+                          const captitalMove = capitalizeFirstLetter(move);
+                          return (
+                            <li key={index}>
+                              <div className="powerMoveWrapper">
+                                <p>{captitalMove}</p>
+                                {foundMove.power ? (
+                                  <p>Power: {foundMove.power}</p>
+                                ) : (
+                                  ""
+                                )}
+                              </div>
+                              <p>{randomEnFlavorText.flavor_text}</p>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </details>
                   </td>
                 </tr>
               </>

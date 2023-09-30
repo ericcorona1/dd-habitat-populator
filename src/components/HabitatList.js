@@ -7,7 +7,7 @@ const HabitatList = ({
   habitatId,
   biomeId,
   handleNumberChange,
-  onEmptyInput
+  onEmptyInput,
 }) => {
   return (
     <div className="habitatList">
@@ -27,7 +27,7 @@ const HabitatList = ({
             handleNumberChange(biomeId, habitatId, event);
           }}
           onBlur={() => {
-            onEmptyInput(biomeId, habitatId)
+            onEmptyInput(biomeId, habitatId);
           }}
           min="0"
           max={habitat[habitatId].pokemon.length}

@@ -1,3 +1,8 @@
+:root {
+  --main-color: #e9e9ed;
+  --accent-color: #8dd2fa;
+}
+
 *,
 ::before,
 ::after {
@@ -104,12 +109,24 @@ main {
   text-align: center;
 }
 
-.pokemonMoves {
+.pokemonMoves > ul {
+  margin: 0;
+  padding-right: 40px;
+  padding-bottom: 5px;
+  background-color: var(--main-color);
+}
+
+.pokemonMoves > summary {
+  background-color: var(--main-color);
+  padding: 10px 0 10px 5px;
+  border-radius: 5px;
+  border-style: ;
   cursor: pointer;
 }
 
-.pokemonMoves > details {
-  max-width: 440px;
+.pokemonMoves[open] > summary {
+  border-radius: 5px 5px 0 0;
+  background-color: var(--accent-color);
 }
 
 .types {
