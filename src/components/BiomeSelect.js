@@ -16,17 +16,16 @@ const BiomeSelect = ({
     : "";
 
   return (
-      <button
-        onClick={() => {
-          highlightBiomeIcon(biomeId);
-        }}
-        key={biomeId}
-        value={biomeId}
-        // className="button-container"
-        className={`button-container ${currentBiome} ${hasHabitatValues}`}
-      >
-        {icon}
-      </button>
+    <button
+      onClick={() => {
+        highlightBiomeIcon(biomeId);
+      }}
+      key={biomeId}
+      value={biomeId}
+      className={`button-container ${currentBiome} ${hasHabitatValues}`}
+    >
+      {icon}
+    </button>
   );
 };
 

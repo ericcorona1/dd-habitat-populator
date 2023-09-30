@@ -1,6 +1,8 @@
 :root {
   --main-color: #e9e9ed;
-  --accent-color: #8dd2fa;
+  --accent-color: #a6caff;
+  --border-color: #8f8f9d;
+  --active-color: #3e8bff;
 }
 
 *,
@@ -15,7 +17,8 @@ main {
 }
 
 button:active {
-  background-color: var(--accent-color);
+  background-color: var(--active-color);
+  border-radius: 5px;
 }
 
 .allBtns {
@@ -27,6 +30,8 @@ button:active {
 
 .button-container {
   flex: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
 }
 
 .button-container button {
@@ -34,13 +39,12 @@ button:active {
 }
 
 .selected {
-  border-style: solid;
-  border-color: blue;
+  border: 2px solid blue;
   border-radius: 5px;
 }
 
 .includedBiome {
-  background-color: lightblue;
+  background-color: var(--accent-color);
 }
 
 .counterInput {
