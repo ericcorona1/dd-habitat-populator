@@ -28,6 +28,12 @@ button:active {
   gap: 2%;
 }
 
+svg {
+  fill: black;
+  width: 20px;
+  height: 20px;
+}
+
 .button-container {
   flex: auto;
   border: 1px solid var(--border-color);
@@ -132,9 +138,17 @@ button:active {
   cursor: pointer;
 }
 
+.pokemonMoves > summary:active {
+  background-color: var(--active-color);
+}
+
 .pokemonMoves[open] > summary {
   border-radius: 5px 5px 0 0;
   background-color: var(--accent-color);
+}
+
+.pokemonMoves[open] > summary:active {
+  background-color: var(--active-color);
 }
 
 .types {
