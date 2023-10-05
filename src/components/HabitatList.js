@@ -35,8 +35,6 @@ const HabitatList = ({
         <button
           onClick={() => {
             increment(biomeId, habitatId);
-          }}
-          onBlur={() => {
             onEmptyInput(biomeId, habitatId);
           }}
         >
