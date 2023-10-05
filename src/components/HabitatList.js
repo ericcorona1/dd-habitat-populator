@@ -36,6 +36,9 @@ const HabitatList = ({
           onClick={() => {
             increment(biomeId, habitatId);
           }}
+          onBlur={() => {
+            onEmptyInput(biomeId, habitatId);
+          }}
         >
           +
         </button>
